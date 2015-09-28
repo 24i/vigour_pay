@@ -1,9 +1,9 @@
-# plugin
-Fork this repo to make vigour-style native plugins.
+# pay
+Native store purchasing and web payment
 
 ## Install
-Add `"plugin": "git+ssh://git@github.com:vigour-io/plugin.git#master"` to the dependencies in your app's pakage.json, then run `npm update plugin`
-Coming soon: `npm i vigour-plugin`
+Add `"pay": "git+ssh://git@github.com:vigour-io/pay.git#master"` to the dependencies in your app's pakage.json, then run `npm update pay`
+Coming soon: `npm i vigour-pay`
 
 ## Updates via upstream remote
 

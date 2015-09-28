@@ -5,7 +5,7 @@ describe('plugin', function () {
   it('should be requireable', function () {
     plugin = require('../../')
     expect(plugin).instanceOf(Plugin)
-    expect(plugin.key).to.equal('plugin')
+    expect(plugin.key).to.equal('pay')
   })
 
   describe('native events', function () {

@@ -1,7 +1,7 @@
 {
-  "name": "plugin",
+  "name": "pay",
   "version": "1.0.0",
-  "description": "Example of a vigour-style native plugin. Make new plugins by forking this repo.",
+  "description": "Native store purchasing and web payment",
   "main": "lib/index.js",
   "scripts": {
     "start": "./node_modules/.bin/gaston",
@@ -9,13 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vigour-io/plugin.git"
+    "url": "https://github.com/vigour-io/pay.git"
   },
   "keywords": [
     "vigour",
     "wrapper",
     "native",
-    "plugin"
+    "plugin",
+    "pay",
+    "payment",
+    "purchasing",
+    "store"
   ],
   "author": "Shawn Inder <shawn@vigour.io>",
   "contributors": [
@@ -23,9 +27,9 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vigour-io/plugin/issues"
+    "url": "https://github.com/vigour-io/pay/issues"
   },
-  "homepage": "https://github.com/vigour-io/plugin",
+  "homepage": "https://github.com/vigour-io/pay",
   "engines": {
     "node": ">=0.12"
   },
@@ -39,8 +43,8 @@
     "plugin": {
       "android": {
         "skipInstall": true,
-        "className": "io.vigour.plugin",
-        "instantiation": "new Plugin(this, webview)"
+        "className": "io.vigour.pay",
+        "instantiation": "new Pay(this, webview)"
       }
     }
   },
