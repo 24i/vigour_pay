@@ -19,7 +19,7 @@ See [wrapper](http://github.com/vigour-io/vigour-native)
 
 ## Config
 
-configuration for `pay` should go in `package.json`
+configuration for `pay` should go in the app's `package.json`
 
 ```json
 {
