@@ -44,7 +44,17 @@ _.set(pkg, ['vigour', 'pay'], {
   },
   "amazon": {
     "products": {
-      "single": "amazon_single_id",
+      "weekly": {
+        "description":"Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla",
+        "itemType": "SUBSCRIPTION",
+        "smallIconUrl":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbDrhKZOXslT-RN6_Ni2CQ8fz7ECxdhODu1hXEE8dGp5ollj2JRA",
+        "title":"Subscription dede",
+        // "price":140.0, // omg no price in here!
+        "subscriptionParent":"test",
+        "currencyPriceMap":{"US":0.0},
+        "languageDescriptionMap":{"US":"—"},
+        "languageTitleMap":{"US":"—"}
+      },
       "monthly": "amazon_montly_id",
       "yearly": "amazon_yearly_id"
     }
@@ -77,16 +87,17 @@ var app = new Element({
       node: 'span'
     },
     label: {
-      node: 'input'
+      node: 'input',
+      text:"weekly"
     },
     button: {
       node: 'button',
       text: 'buy dat',
       on: {
         click () {
-          alert('lets buy ' + app.buying.label.input + '!')
-          var productLabel = app.buying.label.input
+          var productLabel = app.buying.label.node.value
           pay.buy(productLabel, (err, response) => {
+            debugger
             console.log('---> BUY CALLBACK!', err, response)
           })
         }

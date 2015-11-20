@@ -1,0 +1,13 @@
+{
+  "weekly":{
+    "description":"Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla",
+    "itemType":"SUBSCRIPTION",
+    "smallIconUrl":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbDrhKZOXslT-RN6_Ni2CQ8fz7ECxdhODu1hXEE8dGp5ollj2JRA",
+    "title":"Subscription dede",
+    "price":140.0,
+    "subscriptionParent":"test",
+    "currencyPriceMap":{"US":0.0},
+    "languageDescriptionMap":{"US":"—"},
+    "languageTitleMap":{"US":"—"}
+  }
+}
