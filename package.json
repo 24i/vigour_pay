@@ -34,10 +34,12 @@
     "node": ">=0.12"
   },
   "dependencies": {
-    "vigour-wrapper": "^1.0.0"
+    "vigour-ua": "*",
+    "vigour-wrapper": "*"
   },
   "devDependencies": {
-    "gaston": "^0.14.0"
+    "vigour-element": "*",
+    "lodash": "3.10.x"
   },
   "vigour": {
     "plugin": {
@@ -57,7 +59,8 @@
       "after",
       "beforeEach",
       "afterEach",
-      "sinon"
+      "sinon",
+      "alert"
     ]
   }
 }
