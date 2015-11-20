@@ -157,42 +157,40 @@ pay.currency.val = {
 
 ### Methods
 
-#### buy(product, callback(error, response))
+#### buy(productId, callback(error, response))
 
-- buy the `product`
+- buy the product with `productId`
 - when done, call callback passing
   - `error`
   - `response`
 
-#### verifyProducts(products, callback(err, response))
+#### getProducts(callback(err, response))
 
 Used to
 
-- ensure products are actually available in the store
+- get products available for this app on this platform
+
+In order to
+
+- ensure products in `package.json` are actually available in the store
 - get `product.price`
 - get `product.owned`
 
-for a list of `products` (for platform) as shown in `config`.
-
 ##### response
 
-response should be a setObject as shown above at `pay.products.val = { ... }`
-
+response should look like:
 ```javascript
-response = pay.products.val = {
-  label: {
-    available: false, // this product doesn't check out!
+var response = {
+  productId: {
+    price: 999.01,
+    owned: { // check if the device's store account owns the product
+      val: true,
+      receipt: 'RECEIPTFORPRODUCT'
+    }
+    // platform specific info may go here
   },
-  otherlabel: {
-    owned: true // this phone's store account owns it, but I dont have a receipt
-    price: 999.01
-  },
-  thirdlabel: {
-    owned: {
-      val: true, // own it!
-      receipt: 'lalala' // optionally, it got the receipt!
-    },
-    price: 12.50
+  productId2: {
+    price: 0.99
   }
 }
 ```
