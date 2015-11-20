@@ -181,7 +181,7 @@ In order to
 response should look like:
 ```javascript
 var response = {
-  productId: {
+  productId1: {
     price: 999.01,
     owned: { // check if the device's store account owns the product
       val: true,
