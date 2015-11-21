@@ -22,15 +22,15 @@ _.set(pkg, ['vigour', 'pay'], {
     "billingKey": "SUPASECRETwhatevs",
     "products": {
       "single": {
-        "id": "mtv-play_single_episode_purchase",
+        "val": "mtv-play_single_episode_purchase",
         "type": "single-purchase"
       },
       "monthly": {
-        "id": "mtvplay_subscription_monthly",
+        "val": "mtvplay_subscription_monthly",
         "type": "monthly-recurring-subscription"
       },
       "yearly": {
-        "id": "mtvplay_single_purchase",
+        "val": "mtvplay_single_purchase",
         "type": "yearly-recurring-subscription"
       }
     }
@@ -44,18 +44,8 @@ _.set(pkg, ['vigour', 'pay'], {
   },
   "amazon": {
     "products": {
-      "weekly": {
-        "description":"Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla",
-        "itemType": "SUBSCRIPTION",
-        "smallIconUrl":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbDrhKZOXslT-RN6_Ni2CQ8fz7ECxdhODu1hXEE8dGp5ollj2JRA",
-        "title":"Subscription dede",
-        // "price":140.0, // omg no price in here!
-        "subscriptionParent":"test",
-        "currencyPriceMap":{"US":0.0},
-        "languageDescriptionMap":{"US":"—"},
-        "languageTitleMap":{"US":"—"}
-      },
-      "monthly": "amazon_montly_id",
+      "single": "amazon_single_id",
+      "monthly": "amazon_monthly_id",
       "yearly": "amazon_yearly_id"
     }
   }
@@ -97,7 +87,6 @@ var app = new Element({
         click () {
           var productLabel = app.buying.label.node.value
           pay.buy(productLabel, (err, response) => {
-            debugger
             console.log('---> BUY CALLBACK!', err, response)
           })
         }
