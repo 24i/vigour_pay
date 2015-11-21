@@ -66,7 +66,17 @@ var pay = new Pay()
 
 window.p = pay
 
-console.log('?????????????', pay.plain(void 0, true))
+function payString(pay) {
+  return JSON.stringify(pay.plain(filterPay, true), false, 2)
+}
+
+function filterPay (val, key) {
+  return key !== 'bridge'
+}
+
+console.log('???????????', pay.plain(filterPay, true))
+
+// console.log('?????????????', payString(pay))
 
 var app = new Element({
   node: document.body,
@@ -76,7 +86,7 @@ var app = new Element({
     }
   },
   state: {
-    text: JSON.stringify(pay.plain(void 0, true), false, 2)//
+    text: payString(pay)
   },
   // pay stuff
   buying: {
@@ -139,11 +149,10 @@ if(pay.val) {
       writeStatus()
     })
   })
-
 } else {
   console.warn('hey this platform seems to be incompatible with pay :(')
 }
 
 function writeStatus () {
-  app.state.text.val = JSON.stringify(pay.plain(void 0, true), false, 2)
+  app.state.text.val = payString(pay)
 }
