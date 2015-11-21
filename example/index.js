@@ -50,7 +50,7 @@ _.set(pkg, ['vigour', 'pay'], {
     }
   }
 })
-
+console.log('haha pkg', pkg)
 
 // require facebook
 var Pay = require('../lib/')
@@ -60,15 +60,18 @@ Object.getPrototypeOf(Pay.prototype).inject(plain)
 
 var pay = new Pay()
 
+window.p = pay
+
+
 var app = new Element({
   node: document.body,
   topbar: {
     header: {
-      text: 'Pay example app'
+      text: 'Pay example app lala'
     }
   },
   state: {
-    text: JSON.stringify(pay.plain(), false, 2)
+    text: JSON.stringify(pay.plain(void 0, true), false, 2)//
   },
   // pay stuff
   buying: {
@@ -124,10 +127,18 @@ if(pay.val) {
     console.log('---- pay.products!')
     writeStatus()
   })
+
+  pay.products.each((val, key) => {
+    console.log('-- have product', key)
+    val.on(() => {
+      writeStatus()
+    })
+  })
+
 } else {
   console.warn('hey this platform seems to be incompatible with pay :(')
 }
 
 function writeStatus () {
-  app.state.text.val = JSON.stringify(pay.plain(), false, 2)
+  app.state.text.val = JSON.stringify(pay.plain(void 0, true), false, 2)
 }
