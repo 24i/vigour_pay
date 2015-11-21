@@ -55,13 +55,18 @@ console.log('haha pkg', pkg)
 // require facebook
 var Pay = require('../lib/')
 
+
 var plain = require('vigour-js/lib/methods/plain')
-Object.getPrototypeOf(Pay.prototype).inject(plain)
+var Base = require('vigour-js/lib/base')
+Base.prototype.inject(plain)
+
+// Object.getPrototypeOf(Pay.prototype).inject(plain)
 
 var pay = new Pay()
 
 window.p = pay
 
+console.log('?????????????', pay.plain(void 0, true))
 
 var app = new Element({
   node: document.body,
