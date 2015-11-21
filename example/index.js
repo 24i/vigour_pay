@@ -109,21 +109,6 @@ var app = new Element({
           })
         }
       }
-    },
-     button2: {
-      node: 'button',
-      text: 'check what I can buy',
-      on: {
-        click () {
-          pay.verifyProducts()
-
-
-          // (productLabel, (err, response) => {
-          //   debugger
-          //   console.log('---> BUY CALLBACK!', err, response)
-          // })
-        }
-      }
     }
   }
 })
