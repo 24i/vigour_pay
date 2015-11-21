@@ -63,6 +63,17 @@ Base.prototype.inject(plain)
 // Object.getPrototypeOf(Pay.prototype).inject(plain)
 
 var pay = new Pay()
+var script_testing = document.createElement('script')
+const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'
+
+document.getElementsByTagName('head')[0].appendChild(script_testing)
+script_testing.src = AMAZON_WEB_API_TESTING
+script_testing.id = 'amazon-script-testing'
+
+script_testing.onload = () => {
+  amzn_wa.enableApiTester(amzn_wa_tester)
+ // amazonProducts = amzn_wa.IAP._amazonClient._items
+}
 
 window.p = pay
 
