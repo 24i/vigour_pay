@@ -1,0 +1,33 @@
+{
+  "android": {
+    "billingKey": "SUPASECRETwhatevs",
+    "products": {
+      "single": {
+        "val": "mtv-play_single_episode_purchase",
+        "type": "single-purchase"
+      },
+      "monthly": {
+        "val": "mtvplay_subscription_monthly",
+        "type": "monthly-recurring-subscription"
+      },
+      "yearly": {
+        "val": "mtvplay_single_purchase",
+        "type": "yearly-recurring-subscription"
+      }
+    }
+  },
+  "iOS": {
+    "products": {
+      "single": "{region}_single_purchase",
+      "monthly": "{region}_subscription_monthly",
+      "yearly": "{region}_subscription_annual"
+    }
+  },
+  "amazon": {
+    "products": {
+      "single": "amazon_single_id",
+      "monthly": "amazon_monthly_id",
+      "yearly": "amazon_yearly_id"
+    }
+  }
+}

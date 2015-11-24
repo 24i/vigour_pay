@@ -12,71 +12,41 @@ Element.prototype.inject(
   require('vigour-element/lib/events/render')
 )
 
-var _ = require('lodash')
-
-// sneaky fix for package.json
-
-var pkg = require('package.json')
-_.set(pkg, ['vigour', 'pay'], {
-  "android": {
-    "billingKey": "SUPASECRETwhatevs",
-    "products": {
-      "single": {
-        "val": "mtv-play_single_episode_purchase",
-        "type": "single-purchase"
-      },
-      "monthly": {
-        "val": "mtvplay_subscription_monthly",
-        "type": "monthly-recurring-subscription"
-      },
-      "yearly": {
-        "val": "mtvplay_single_purchase",
-        "type": "yearly-recurring-subscription"
-      }
-    }
-  },
-  "iOS": {
-    "products": {
-      "single": "{region}_single_purchase",
-      "monthly": "{region}_subscription_monthly",
-      "yearly": "{region}_subscription_annual"
-    }
-  },
-  "amazon": {
-    "products": {
-      "single": "amazon_single_id",
-      "monthly": "amazon_monthly_id",
-      "yearly": "amazon_yearly_id"
-    }
-  }
-})
-console.log('haha pkg', pkg)
-
 // require facebook
 var Pay = require('../lib/')
 
-
 var plain = require('vigour-js/lib/methods/plain')
-var Base = require('vigour-js/lib/base')
-Base.prototype.inject(plain)
-
-// Object.getPrototypeOf(Pay.prototype).inject(plain)
+var Observable = require('vigour-js/lib/base')
+Observable.prototype.inject(plain)
 
 var pay = new Pay()
 
 window.p = pay
 
-function payString(pay) {
-  return JSON.stringify(pay.plain(filterPay, true), false, 2)
+function payString (pay) {
+  return JSON.stringify(pay.plain(void 0, true), false, 2)
 }
 
-function filterPay (val, key) {
-  return key !== 'bridge'
-}
-
-console.log('???????????', pay.plain(filterPay, true))
+console.log('???????????', pay.plain(void 0, true))
 
 // console.log('?????????????', payString(pay))
+
+var Product = new Element({
+  label: {
+    helper: {
+      node: 'span',
+      text: 'product (app) label:'
+    },
+    value:  {
+      node: 'span',
+      text: '...'
+    }
+  },
+  id: {
+    node: 'span',
+    text: 'product label'
+  }
+}).Constructor
 
 var app = new Element({
   node: document.body,
@@ -89,14 +59,18 @@ var app = new Element({
     text: payString(pay)
   },
   // pay stuff
+  products: {
+
+  },
   buying: {
+
     helper: {
       text: 'buy:',
       node: 'span'
     },
     label: {
       node: 'input',
-      text:"weekly"
+      text: "monthly"
     },
     button: {
       node: 'button',
@@ -125,6 +99,9 @@ var app = new Element({
         }
       }
     }
+  },
+  log: {
+    text: 'messages will appear here...'
   }
 })
 
