@@ -30,11 +30,11 @@
       "yearly": "amazon_yearly_id"
     }
   },
-  "test": {
+  "testStore": {
     "products": {
-      "single": "{region}_single_teststore_id",
-      "monthly": "{region}_monthly_teststore_id",
-      "yearly": "{region}_annual_teststore_id"
+      "single": "{region}_single_test",
+      "monthly": "{region}_monthly_test",
+      "yearly": "{region}_yearly_test"
     }
   }
 }

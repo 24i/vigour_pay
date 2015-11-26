@@ -35,11 +35,13 @@
   },
   "dependencies": {
     "vigour-ua": "*",
-    "vigour-wrapper": "*"
+    "vigour-wrapper": "~2.0.8",
+    "vigour-js": "~0.3.0",
+    "vigour-config": "~0.0.6"
   },
   "devDependencies": {
     "vigour-element": "*",
-    "lodash": "3.10.x"
+    "gaston": "0.27.1"
   },
   "vigour": {
     "plugin": {

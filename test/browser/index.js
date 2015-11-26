@@ -1,40 +1,43 @@
-var Plugin = require('vigour-native/lib/bridge/Plugin')
-var name = require('../../package.json').name
-var plugin
+'use strict'
 
-describe('plugin', function () {
-  it('should be requireable', function () {
-    plugin = require('../../')
-    expect(plugin).instanceOf(Plugin)
-    expect(plugin.key).to.equal(name)
+var sharedTests = require('../tests')
+var config = require('../config')
+var pay
+
+require('./mockNativeMethods')
+
+describe('Pay automated tests', function () {
+  describe('shared + mock', function () {
+
   })
 
-  describe('native events', function () {
-    it('should forward the `ready` event', function () {
-      var spy = sinon.spy()
-      plugin.on('ready', spy)
-      // Let's fake a ready event for this plugin
-      window.vigour.native.bridge.ready(null, 'message 1', name)
-      window.vigour.native.bridge.ready(null, 'message 2')
-      expect(spy).calledOnce
+  describe('shared + bridged + mock Native', function () {
+    it('should require bridged module', function () {
+      pay = window.vigour_pay = require('../../lib/bridged')
+      expect(pay).to.be.ok
     })
 
-    it('should forward native `error` events', function () {
-      var spy = sinon.spy()
-      plugin.on('error', spy)
-      // Let's fake a ready event for this plugin
-      window.vigour.native.bridge.error('message 1', name)
-      window.vigour.native.bridge.error('message 2')
-      expect(spy).calledOnce
+    it('should be able to hack in store config', function () {
+      console.log('wut', pay)
+      pay.set({
+        _config: config,
+        region: 'testRegion',
+        store: 'testStore'
+      })
+      
+      expect(pay).to.have.property('products')
+
+      expect(pay.products).to.have.property('single')
+        .which.has.property('val', 'testRegion_single_test')
+
+      expect(pay.products).to.have.property('monthly')
+        .which.has.property('val', 'testRegion_monthly_test')
+
+      expect(pay.products).to.have.property('yearly')
+        .which.has.property('val', 'testRegion_yearly_test')
+
     })
 
-    it('should forward pushed messages', function () {
-      var spy = sinon.spy()
-      plugin.on('receive', spy)
-      // Let's fake a ready event for this plugin
-      window.vigour.native.bridge.receive(null, 'message 1', name)
-      window.vigour.native.bridge.receive(null, 'message 2')
-      expect(spy).calledOnce
-    })
+    sharedTests()
   })
 })
