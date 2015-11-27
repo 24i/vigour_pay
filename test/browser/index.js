@@ -1,8 +1,12 @@
 'use strict'
 
 var sharedTests = require('../tests')
-var config = require('../config')
+var Config = require('vigour-config')
+var testConfig = require('../config')
+var config = new Config(testConfig)
+
 var pay
+
 
 require('./mockNativeMethods')
 
@@ -17,10 +21,9 @@ describe('Pay automated tests', function () {
       expect(pay).to.be.ok
     })
 
-    it('should be able to hack in store config', function () {
-      console.log('wut', pay)
+    it('should be able to set config and store', function () {
       pay.set({
-        _config: config,
+        config: config.serialize(),
         region: 'testRegion',
         store: 'testStore'
       })
