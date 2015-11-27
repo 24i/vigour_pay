@@ -2,20 +2,14 @@
 
 var sharedTests = require('../tests')
 var Config = require('vigour-config')
-var testConfig = require('../config')
-var config = new Config(testConfig)
+var config = new Config()
 
 var pay
-
 
 require('./mockNativeMethods')
 
 describe('Pay automated tests', function () {
-  describe('shared + mock', function () {
-
-  })
-
-  describe('shared + bridged + mock Native', function () {
+  describe('shared + bridged + mock native methods', function () {
     it('should require bridged module', function () {
       pay = window.vigour_pay = require('../../lib/bridged')
       expect(pay).to.be.ok
@@ -23,7 +17,6 @@ describe('Pay automated tests', function () {
 
     it('should be able to set config and store', function () {
       pay.set({
-        config: config.serialize(),
         region: 'testRegion',
         store: 'testStore'
       })

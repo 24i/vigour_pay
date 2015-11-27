@@ -2,8 +2,8 @@
 
 var sharedTests = require('../tests')
 var Config = require('vigour-config')
-// var testConfig = require('../config')
-var config = new Config()
+var testConfig = require('../config')
+var config = new Config(testConfig)
 
 var pay
 
@@ -12,7 +12,7 @@ var isamazon = ISAMAZON.test(navigator.userAgent)
 
 require('./mockNativeMethods')
 
-describe('Pay manual amazon tests', function () {
+describe('Pay manual tests', function () {
   it('should require', function () {
     pay = window.vigour_pay = require('../../lib')
     expect(pay).to.be.ok

@@ -6,9 +6,9 @@ module.exports = function sharedTests () {
   describe('methods and properties shining', function () {
     it('should be verifying products', function (done) {
       pay = window.vigour_pay
-      console.log('products haha', pay.products.serialize())
+      console.log('products', pay.products.serialize())
       setTimeout(() => {
-        console.log('products haha', pay.products.serialize())
+        console.log('products after timeout', pay.products.serialize())
         pay.products.each(function (product) {
           expect(product._verified).to.be.true
           expect(product).to.have.property('price')
