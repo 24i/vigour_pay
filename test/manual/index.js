@@ -7,18 +7,24 @@ var config = new Config(testConfig)
 
 var pay
 
-var ISAMAZON = /amazon-fireos|AmazonWebAppPlatform|; AFT/
-var isamazon = ISAMAZON.test(navigator.userAgent)
+var ua = require('vigour-ua')
+var agent = ua(navigator.userAgent)
+var isweb = agent.browser
+
+const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'
 
 require('./mockNativeMethods')
 
 describe('Pay manual tests', function () {
   it('should require', function () {
-    pay = window.vigour_pay = require('../../lib')
-    expect(pay).to.be.ok
-    if (isamazon) {
+    if (isweb) {
+      console.log('web > emulate amazon')
+      pay = window.vigour_pay = require('../../lib/amazon')
       fixAmazonTesting(pay.script.element)
+    } else {
+      pay = window.vigour_pay = require('../../lib')
     }
+    expect(pay).to.be.ok
   })
 
   it('should require bridged module', function () {
@@ -30,7 +36,7 @@ describe('Pay manual tests', function () {
     pay.set({
       config: config.serialize()
     })
-    
+
     pay.store.emit('value')
 
     expect(pay).to.have.property('products')
@@ -43,5 +49,4 @@ describe('Pay manual tests', function () {
 })
 
 function fixAmazonTesting (scriptElement) {
-
 }

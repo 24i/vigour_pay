@@ -62,7 +62,9 @@
       "beforeEach",
       "afterEach",
       "sinon",
-      "alert"
+      "alert",
+      "amzn_wa",
+      "amzn_wa_tester"
     ]
   }
 }
