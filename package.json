@@ -44,6 +44,11 @@
     "gaston": "0.27.1"
   },
   "vigour": {
+    "pay": {
+      "amazon": {
+        "src": "https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API.min.js"
+      }
+    },
     "plugin": {
       "android": {
         "skipInstall": true,
@@ -54,17 +59,8 @@
   },
   "standard": {
     "globals": [
-      "describe",
-      "it",
-      "expect",
-      "before",
-      "after",
-      "beforeEach",
-      "afterEach",
-      "sinon",
       "alert",
-      "amzn_wa",
-      "amzn_wa_tester"
+      "amzn_wa"
     ]
   }
 }

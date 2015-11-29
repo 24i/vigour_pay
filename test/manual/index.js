@@ -1,9 +1,6 @@
 'use strict'
 
 var sharedTests = require('../tests')
-var Config = require('vigour-config')
-var testConfig = require('../config')
-var config = new Config(testConfig)
 
 var pay
 
@@ -13,8 +10,6 @@ var isweb = agent.browser
 
 const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'
 
-require('./mockNativeMethods')
-
 describe('Pay manual tests', function () {
   it('should require', function () {
     if (isweb) {
@@ -22,6 +17,7 @@ describe('Pay manual tests', function () {
       pay = window.vigour_pay = require('../../lib/amazon')
       fixAmazonTesting(pay.script.element)
     } else {
+      console.error('not web native lol')
       pay = window.vigour_pay = require('../../lib')
     }
     expect(pay).to.be.ok
@@ -33,11 +29,11 @@ describe('Pay manual tests', function () {
   })
 
   it('should be able to set config', function () {
-    pay.set({
-      config: config.serialize()
-    })
+    // pay.set({
+    //   config: config.serialize()
+    // })
 
-    pay.store.emit('value')
+    // pay.store.emit('value')
 
     expect(pay).to.have.property('products')
     expect(pay.products).to.have.property('single')
@@ -49,4 +45,5 @@ describe('Pay manual tests', function () {
 })
 
 function fixAmazonTesting (scriptElement) {
+  console.log('fixAmazonTesting')
 }

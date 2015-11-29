@@ -34,7 +34,8 @@
           "single": "amazon_single_id",
           "monthly": "amazon_monthly_id",
           "yearly": "amazon_yearly_id"
-        }
+        },
+        "src": "https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API.min.js"
       },
       "testStore": {
         "products": {
@@ -44,6 +45,21 @@
         }
       }
     }
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "expect",
+      "before",
+      "after",
+      "beforeEach",
+      "afterEach",
+      "sinon",
+      "alert",
+      "amzn_wa",
+      "amzn_wa_tester"
+    ]
   }
 }
 
