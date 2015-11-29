@@ -1,41 +1,71 @@
 'use strict'
 
-var pay
+module.exports = function payTests (inject) {
+  var pay
 
-module.exports = function sharedTests () {
-  describe('methods and properties shining', function () {
-    it('should be verifying products', function (done) {
-      pay = window.vigour_pay
-      console.log('products', pay.products.serialize())
-      setTimeout(() => {
-        console.log('products after timeout', pay.products.serialize())
-        pay.products.each(function (product) {
-          expect(product._verified).to.be.true
-          expect(product).to.have.property('price')
-        })
-        done()
-      }, 250)
-    })
+  it('require pay', function () {
+    console.log('requireing')
+    try {
+      pay = require('../lib')
+    } catch (err) {
+      console.log(err.stack)
+      throw err
+    }
+    pay = require('../lib')
+    console.log('ok required it')
+  })
 
-    it('should buy products', function (done) {
-      var total = 0
-      var bought = 0
-      var store = pay.store.val
-
-      pay.products.each(function (product, label) {
-        total++
-        pay.buy(label, function (err, receipt) {
-          bought++
-          expect(product).to.have.property('owned')
-          if(store === 'testStore') {
-          	expect(product.owned.val)
-          		.to.equal('hashtovalidate')
-          }
-          if (bought === total) {
-          	done()
-          }
-        })
+  if (inject) {
+    it('create new pay with platform injection', function () {
+      pay = new pay.Constructor(inject)
+      console.log('recreated with inject lala')
+      pay.on('error', function (err) {
+        throw err
       })
     })
+  }
+
+  it('should have products', function () {
+    expect(pay.products).to.have.property('single')
+      .which.has.property('val').which.is.a.string
+    expect(pay.products).to.have.property('monthly')
+      .which.has.property('val').which.is.a.string
+    expect(pay.products).to.have.property('yearly')
+      .which.has.property('val').which.is.a.string
+  })
+
+  it('should be verifying products', function (done) {
+    this.timeout(550)
+
+    setTimeout(function () {
+      console.log('products after timeout', pay.products.serialize())
+      pay.products.each(function (product) {
+        expect(product).to.have.property('price')
+      })
+      done()
+    }, 500)
+  })
+
+  it('should buy products', function (done) {
+    var total = 0
+    var bought = 0
+
+    pay.products.each(function (product, label) {
+      total++
+      product.on('error', function (err) {
+        throw err
+      })
+      product.owned.val = true
+      product.owned.once('value', function () {
+        expect(this.val).to.be.true
+        expect(this.receipt).to.have.property('val')
+          .which.is.ok
+        if (++bought === total) {
+          done()
+        }
+      })
+    })
+
+    expect(total).to.be.ok
   })
 }
