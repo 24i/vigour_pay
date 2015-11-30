@@ -17,7 +17,7 @@ module.exports = function payTests (inject) {
 
   if (inject) {
     it('create new pay with platform injection', function () {
-      pay = new pay.Constructor(inject)
+      pay = window.p = new pay.Constructor(inject)
       console.log('recreated with inject lala')
       pay.on('error', function (err) {
         throw err
@@ -47,6 +47,7 @@ module.exports = function payTests (inject) {
   })
 
   it('should buy products', function (done) {
+    console.log('--------------- buying products')
     var total = 0
     var bought = 0
 
