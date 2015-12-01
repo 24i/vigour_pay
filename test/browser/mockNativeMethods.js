@@ -24,7 +24,7 @@ var nativeMethods = {
     })
   },
   buy (productId, cb) {
-    console.log('ha fake buy!')
+    console.log('ha fake buy!', productId, cb)
     // buy dat product
     setTimeout(() => {
       // receipt should include everything needed
@@ -38,9 +38,8 @@ var nativeMethods = {
       // }
 
       var receipt = 'hashtovalidate'
-
       var err = null
-
+      console.log('callbash')
       cb(err, receipt)
     })
   }

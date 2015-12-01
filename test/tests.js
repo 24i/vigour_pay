@@ -1,5 +1,7 @@
 'use strict'
 
+const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'
+
 module.exports = function payTests (inject) {
   var pay
 
@@ -12,28 +14,27 @@ module.exports = function payTests (inject) {
       console.log(err.stack)
       throw err
     }
-    pay = require('../lib')
+    window.p = pay = require('../lib')
     console.log('ok required it')
   })
 
   if (inject) {
     it('create new pay with platform injection', function () {
+      console.log('INJECT DAT')
       pay.inject(inject)
-      // pay = window.p = new pay.Constructor(inject)
-      console.log('recreated with inject lala')
       pay.on('error', function (err) {
         throw err
       })
-      // fake ready from native side
-      console.log('urprurp')
-      try {
-        pay.ready.val = true
-      } catch (err) {
-        console.log(err.stack)
-        throw err
+      if (inject.store === 'testStore') {
+        // fake ready from native side
+        pay.platform.ready.val = true
+      } else if (inject.store === 'amazon') {
+        console.log('fiddling manual tests on web')
+        pay.platform.scriptLoaded.is(true, function () {
+          console.error('YESYES')
+          injectAmazonTestSDK()
+        })
       }
-      pay.ready.val = true
-      console.log('urprurp')
     })
   }
 
@@ -47,15 +48,12 @@ module.exports = function payTests (inject) {
   })
 
   it('should be verifying products', function (done) {
-    this.timeout(550)
-
-    setTimeout(function () {
-      console.log('products after timeout', pay.products.serialize())
+    pay.ready.is(true, function (val) {
       pay.products.each(function (product) {
         expect(product).to.have.property('price')
       })
       done()
-    }, 500)
+    })
   })
 
   it('should buy products', function (done) {
@@ -65,20 +63,32 @@ module.exports = function payTests (inject) {
 
     pay.products.each(function (product, label) {
       total++
-      product.on('error', function (err) {
+      try {
+        product.owned.once('data', function (data) {
+          expect(this.val).to.be.true
+          expect(this.receipt).to.be.ok.and.have.property('val').which.is.ok
+          if (++bought === total) {
+            done()
+          }
+        })
+        product.owned.val = true
+      } catch (err) {
+        console.log(err.stack)
         throw err
-      })
-      product.owned.val = true
-      product.owned.once('value', function () {
-        expect(this.val).to.be.true
-        expect(this.receipt).to.have.property('val')
-          .which.is.ok
-        if (++bought === total) {
-          done()
-        }
-      })
+      }
     })
 
     expect(total).to.be.ok
   })
+}
+
+function injectAmazonTestSDK () {
+  var script_testing = document.createElement('script')
+  script_testing.src = AMAZON_WEB_API_TESTING
+  script_testing.id = 'amazon-script-testing'
+  script_testing.onload = () => {
+    console.log('doing stufs?')
+    amzn_wa.enableApiTester(amzn_wa_tester)
+  }
+  document.getElementsByTagName('head')[0].appendChild(script_testing)
 }
