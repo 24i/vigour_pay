@@ -3,6 +3,8 @@ var tests = require('../tests')
 var nativeInject = require('../../lib/platform/native')
 
 describe('Pay automated tests', function () {
+  this.bail(true)
+
   // describe('Mock Plugin Tests', function () {
   //   tests(require('./mock'))
   // })

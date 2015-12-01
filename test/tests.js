@@ -7,6 +7,7 @@ module.exports = function payTests (inject) {
     console.log('requireing')
     try {
       pay = require('../lib')
+      // pay = require('../lib')
     } catch (err) {
       console.log(err.stack)
       throw err
@@ -17,11 +18,22 @@ module.exports = function payTests (inject) {
 
   if (inject) {
     it('create new pay with platform injection', function () {
-      pay = window.p = new pay.Constructor(inject)
+      pay.inject(inject)
+      // pay = window.p = new pay.Constructor(inject)
       console.log('recreated with inject lala')
       pay.on('error', function (err) {
         throw err
       })
+      // fake ready from native side
+      console.log('urprurp')
+      try {
+        pay.ready.val = true
+      } catch (err) {
+        console.log(err.stack)
+        throw err
+      }
+      pay.ready.val = true
+      console.log('urprurp')
     })
   }
 
