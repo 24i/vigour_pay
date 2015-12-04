@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "vigour-ua": "*",
-    "vigour-wrapper": "~2.0.8",
+    "vigour-wrapper": "~2.2.0",
     "vigour-js": "~0.3.0",
     "vigour-config": "~0.0.6"
   },

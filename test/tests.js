@@ -27,10 +27,10 @@ module.exports = function payTests (inject) {
       })
       if (inject.store === 'testStore') {
         // fake ready from native side
-        pay.platform.ready.val = true
+        pay._platform.ready.val = true
       } else if (inject.store === 'amazon') {
         console.log('fiddling manual tests on web')
-        pay.platform.scriptLoaded.is(true, function () {
+        pay._platform.scriptLoaded.is(true, function () {
           console.error('YESYES')
           injectAmazonTestSDK()
         })
