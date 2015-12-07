@@ -4,8 +4,14 @@
   "description": "Native store purchasing and web payment",
   "main": "lib/index.js",
   "scripts": {
-    "start": "./node_modules/.bin/gaston",
-    "test": "./node_modules/.bin/gaston test browser"
+    "test": "./node_modules/.bin/gaston test -r browser",
+    "ios-test": "cd test && ../node_modules/.bin/gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms ios",
+    "ios": "npm run build && wrapper build --native.selectedPlatforms ios",
+    "android-test": "cd test && ../node_modules/.bin/gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms android",
+    "android": "npm run build && wrapper build --native.selectedPlatforms android",
+    "all": "npm run build && wrapper build",
+    "prepush": "./node_modules/.bin/standard lib/**/*.js",
+    "postinstall": "./makelinks.sh vigour-pay"
   },
   "repository": {
     "type": "git",
