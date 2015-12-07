@@ -2,11 +2,9 @@
 
 var tests = require('../tests')
 
-var pay
-
 var ua = require('vigour-ua')
-var agent = ua(navigator.userAgent)
-var inject = agent.browser 
+var agent = typeof navigator !== 'undefined' && ua(navigator.userAgent)
+var inject = agent && agent.browser
   ? require('../../lib/platform/amazon')
   : false
 
