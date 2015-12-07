@@ -1,5 +1,6 @@
 'use strict'
 var bridge = require('vigour-wrapper/lib/bridge')
+var testData = require('../testData.json')
 
 bridge.lable = 'mockBridge'
 bridge.mock = {
@@ -10,20 +11,8 @@ bridge.mock = {
       // nice to have:
       // - establish if store account owns products
       //  - get receipts
-      var products = {
-        testRegion_single_test: {
-          price: 0.99
-        },
-        testRegion_monthly_test: {
-          price: 4.99
-        },
-        testRegion_yearly_test: {
-          price: 14.99
-        }
-      }
-      var err = null
       setTimeout(() => {
-        cb(err, products)
+        cb(null, testData.products)
       })
     },
     buy (productId, cb) {
@@ -35,15 +24,8 @@ bridge.mock = {
         // by a third party (app UMS / MTV backend)
         // (thats not already known in JS land)
 
-        // var receipt = {
-        //  code: 'speshash',
-        //  time: 123123
-        // }
-
-        var receipt = 'hashtovalidate'
-        var err = null
-        console.log('callbash')
-        cb(err, receipt)
+        // err, receipt
+        cb(null, testData.receipt)
       })
     }
   }

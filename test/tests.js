@@ -6,7 +6,6 @@ module.exports = function payTests (inject) {
   var pay
 
   it('require pay', function () {
-    console.log('requireing')
     try {
       pay = require('../lib')
       // pay = require('../lib')
@@ -15,13 +14,11 @@ module.exports = function payTests (inject) {
       throw err
     }
     window.p = pay = require('../lib')
-    console.log('ok required it')
   })
 
   if (inject) {
     it('create new pay with platform injection', function () {
-      console.log('INJECT DAT')
-      pay.inject(inject)
+      pay = new pay.Constructor(inject)
       pay.on('error', function (err) {
         throw err
       })
@@ -29,9 +26,7 @@ module.exports = function payTests (inject) {
         // fake ready from native side
         pay._platform.ready.val = true
       } else if (inject.store === 'amazon') {
-        console.log('fiddling manual tests on web')
         pay._platform.scriptLoaded.is(true, function () {
-          console.error('YESYES')
           injectAmazonTestSDK()
         })
       }
