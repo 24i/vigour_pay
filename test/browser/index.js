@@ -6,7 +6,7 @@ describe('Pay automated tests', function () {
   this.bail(true)
 
   describe('Mock Bridge Tests', function () {
-    require('./mockNativeMethods')
+    require('./mockBridge')
     nativeInject.store = 'testStore'
     nativeInject.region = 'testRegion'
     tests(nativeInject)
