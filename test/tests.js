@@ -17,7 +17,7 @@ module.exports = function payTests (inject) {
   })
 
   if (inject) {
-    it('create new pay with platform injection', function () {
+    it('create new pay with platform injection', function (done) {
       pay = new pay.Constructor(inject)
       pay.on('error', function (err) {
         throw err
@@ -25,9 +25,10 @@ module.exports = function payTests (inject) {
       if (inject.store === 'testStore') {
         // fake ready from native side
         pay._platform.ready.val = true
+        done()
       } else if (inject.store === 'amazon') {
         pay._platform.scriptLoaded.is(true, function () {
-          injectAmazonTestSDK()
+          injectAmazonTestSDK(done)
         })
       }
     })
@@ -43,7 +44,9 @@ module.exports = function payTests (inject) {
   })
 
   it('should be verifying products', function (done) {
+    console.log('pay.ready.val', pay.ready.val, inject)
     pay.ready.is(true, function (val) {
+      console.log('wat ready')
       pay.products.each(function (product) {
         expect(product).to.have.property('price')
       })
@@ -77,13 +80,16 @@ module.exports = function payTests (inject) {
   })
 }
 
-function injectAmazonTestSDK () {
+function injectAmazonTestSDK (cb) {
   var script_testing = document.createElement('script')
   script_testing.src = AMAZON_WEB_API_TESTING
   script_testing.id = 'amazon-script-testing'
   script_testing.onload = () => {
     console.log('doing stufs?')
     amzn_wa.enableApiTester(amzn_wa_tester)
+    if (cb) {
+      cb()
+    }
   }
   document.getElementsByTagName('head')[0].appendChild(script_testing)
 }
