@@ -1,0 +1,14 @@
+{
+  "products": {
+    "testRegion_single_test": {
+      "price": 0.99
+    },
+    "testRegion_monthly_test": {
+      "price": 4.99
+    },
+    "testRegion_yearly_test": {
+      "price": 14.99
+    }
+  },
+  "receipt": "hashtovalidate"
+}
