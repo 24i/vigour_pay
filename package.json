@@ -4,7 +4,7 @@
   "description": "Native store purchasing and web payment",
   "main": "lib/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/gaston test -r browser",
+    "test": "gaston test -r browser",
     "ios-test": "cd test && ../node_modules/.bin/gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms ios",
     "ios": "npm run build && wrapper build --native.selectedPlatforms ios",
     "android-test": "cd test && ../node_modules/.bin/gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms android",
@@ -40,10 +40,10 @@
     "node": ">=0.12"
   },
   "dependencies": {
-    "vigour-ua": "*",
-    "vigour-wrapper": "~2.2.0",
+    "vigour-config": "~0.0.6",
+    "vigour-env": "~1.0.9",
     "vigour-js": "~0.3.0",
-    "vigour-config": "~0.0.6"
+    "vigour-wrapper": "~2.2.0"
   },
   "devDependencies": {
     "vigour-element": "*",
