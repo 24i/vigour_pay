@@ -55,7 +55,6 @@ module.exports = function payTests (inject) {
   })
 
   it('should buy products', function (done) {
-    console.log('--------------- buying products')
     var total = 0
     var bought = 0
 
@@ -85,7 +84,6 @@ function injectAmazonTestSDK (cb) {
   script_testing.src = AMAZON_WEB_API_TESTING
   script_testing.id = 'amazon-script-testing'
   script_testing.onload = () => {
-    console.log('doing stufs?')
     amzn_wa.enableApiTester(amzn_wa_tester)
     if (cb) {
       cb()

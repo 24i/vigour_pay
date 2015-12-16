@@ -6,7 +6,6 @@ bridge.lable = 'mockBridge'
 bridge.mock = {
   methods: {
     getProducts (opts, cb) {
-      console.log('ha fake getProducts!')
       // get those products available to this device
       // nice to have:
       // - establish if store account owns products
@@ -16,7 +15,6 @@ bridge.mock = {
       })
     },
     buy (productId, cb) {
-      console.log('ha fake buy!', productId, cb)
       // buy dat product
       setTimeout(() => {
         // receipt should include everything needed
