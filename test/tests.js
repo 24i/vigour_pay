@@ -2,7 +2,7 @@
 
 const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'
 
-module.exports = function payTests (inject) {
+module.exports = function payTests (inject, type) {
   var pay
 
   it('require pay', function () {
@@ -16,8 +16,14 @@ module.exports = function payTests (inject) {
     window.p = pay = require('../lib')
   })
 
-  if (inject) {
+  if (inject || type === 'mock') {
     it('create new pay with platform injection', function (done) {
+      if (type === 'mock') {
+        inject = require('../lib/platform/mock')
+        inject._platform.activeMode = true
+        inject.store = 'testStore'
+        inject.region = 'testRegion'
+      }
       pay = new pay.Constructor(inject)
       pay.on('error', function (err) {
         throw err
@@ -44,9 +50,9 @@ module.exports = function payTests (inject) {
   })
 
   it('should be verifying products', function (done) {
-    console.log('pay.ready.val', pay.ready.val, inject)
+    // console.log('pay.ready.val', pay.ready.val, inject)
     pay.ready.is(true, function (val) {
-      console.log('wat ready')
+      // console.log('wat ready')
       pay.products.each(function (product) {
         expect(product).to.have.property('price')
       })
@@ -55,7 +61,6 @@ module.exports = function payTests (inject) {
   })
 
   it('should buy products', function (done) {
-    console.log('--------------- buying products')
     var total = 0
     var bought = 0
 
@@ -85,7 +90,6 @@ function injectAmazonTestSDK (cb) {
   script_testing.src = AMAZON_WEB_API_TESTING
   script_testing.id = 'amazon-script-testing'
   script_testing.onload = () => {
-    console.log('doing stufs?')
     amzn_wa.enableApiTester(amzn_wa_tester)
     if (cb) {
       cb()
