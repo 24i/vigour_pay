@@ -13,10 +13,10 @@ describe('Pay automated tests', function () {
   })
 
   describe('Mock Platform tests', function () {
-    var mockPlatform = require('../../lib/platform/mock')
-    mockPlatform._platform.activeMode = true
-    mockPlatform.store = 'testStore'
-    mockPlatform.region = 'testRegion'
-    tests(mockPlatform, 'platform')
+    // var mockPlatform = require('../../lib/platform/mock')
+    // mockPlatform._platform.activeMode = true
+    // mockPlatform.store = 'testStore'
+    // mockPlatform.region = 'testRegion'
+    tests(null, 'mock')
   })
 })

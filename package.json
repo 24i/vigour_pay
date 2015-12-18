@@ -40,10 +40,11 @@
     "node": ">=0.12"
   },
   "dependencies": {
-    "vigour-ua": "*",
-    "vigour-wrapper": "~2.2.0",
+    "vigour-config": "~0.0.6",
+    "vigour-env": "^1.0.12",
     "vigour-js": "~0.3.0",
-    "vigour-config": "~0.0.6"
+    "vigour-ua": "*",
+    "vigour-wrapper": "~2.2.0"
   },
   "devDependencies": {
     "vigour-element": "*",
