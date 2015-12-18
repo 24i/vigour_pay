@@ -41,9 +41,9 @@
   },
   "dependencies": {
     "vigour-config": "~0.0.6",
-    "vigour-env": "~1.0.9",
+    "vigour-env": "^1.0.12",
     "vigour-js": "~0.3.0",
-    "vigour-ua": "0.0.3",
+    "vigour-ua": "*",
     "vigour-wrapper": "~2.2.0"
   },
   "devDependencies": {

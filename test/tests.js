@@ -2,7 +2,7 @@
 
 const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'
 
-module.exports = function payTests (inject) {
+module.exports = function payTests (inject, type) {
   var pay
 
   it('require pay', function () {
@@ -16,8 +16,14 @@ module.exports = function payTests (inject) {
     window.p = pay = require('../lib')
   })
 
-  if (inject) {
+  if (inject || type === 'mock') {
     it('create new pay with platform injection', function (done) {
+      if (type === 'mock') {
+        inject = require('../lib/platform/mock')
+        inject._platform.activeMode = true
+        inject.store = 'testStore'
+        inject.region = 'testRegion'
+      }
       pay = new pay.Constructor(inject)
       pay.on('error', function (err) {
         throw err
