@@ -86,6 +86,7 @@ module.exports = function payTests (inject, type) {
 }
 
 function injectAmazonTestSDK (cb) {
+  console.log('inject dat amazon test SDK shizle')
   var script_testing = document.createElement('script')
   script_testing.src = AMAZON_WEB_API_TESTING
   script_testing.id = 'amazon-script-testing'
