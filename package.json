@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "vigour-element": "*",
-    "gaston": "0.27.1"
+    "gaston": "~0.29.5"
   },
   "vigour": {
     "pay": {
