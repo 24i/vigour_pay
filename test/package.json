@@ -44,6 +44,41 @@
           "yearly": "{region}_yearly_test"
         }
       }
+    },
+    "native": {
+      "debug": true,
+      "platforms": {
+        "ios": {
+          "productName": "Orientation Tests",
+          "organizationName": "Vigour",
+          "organizationIdentifier": "io.vigour.orientation",
+          "buildNumber": "1",
+          "appIndexPath": "build.html",
+          "NSAllowsArbitraryLoads": true,
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true,
+            "mocha.js": true,
+            "mocha.css": true
+          }
+        },
+        "android": {
+          "debug": true,
+          "run": true,
+          "productName": "Orientation Tests",
+          "applicationId": "io.vigour.orientation",
+          "appIndexPath": "build.html",
+          "splashDuration": "0",
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true,
+            "mocha.js": true,
+            "mocha.css": true
+          }
+        }
+      }
     }
   },
   "standard": {

@@ -1,5 +1,7 @@
 'use strict'
 
+require('gaston-tester')
+
 const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'
 
 module.exports = function payTests (inject, type) {
@@ -7,13 +9,13 @@ module.exports = function payTests (inject, type) {
 
   it('require pay', function () {
     try {
-      pay = require('../lib')
+      console.log('craete pay')
+      pay = window.PAY = require('../lib')
       // pay = require('../lib')
     } catch (err) {
       console.log(err.stack)
       throw err
     }
-    window.p = pay = require('../lib')
   })
 
   if (inject || type === 'mock') {
@@ -24,7 +26,8 @@ module.exports = function payTests (inject, type) {
         inject.store = 'testStore'
         inject.region = 'testRegion'
       }
-      pay = new pay.Constructor(inject)
+      console.error('create new pay with inject')
+      pay = window.PAY = new pay.Constructor(inject)
       pay.on('error', function (err) {
         throw err
       })
