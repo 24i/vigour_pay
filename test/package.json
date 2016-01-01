@@ -51,7 +51,7 @@
         "ios": {
           "productName": "Orientation Tests",
           "organizationName": "Vigour",
-          "organizationIdentifier": "io.vigour.orientation",
+          "organizationIdentifier": "io.vigour.test",
           "buildNumber": "1",
           "appIndexPath": "build.html",
           "NSAllowsArbitraryLoads": true,
