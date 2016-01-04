@@ -54,7 +54,7 @@ module.exports = function payTests (inject, type) {
 
   it('should be verifying products', function (done) {
     // console.log('pay.ready.val', pay.ready.val, inject)
-    pay.ready.is(true, function (val) {
+    pay.validated.is(true, function (val) {
       // console.log('wat ready')
       pay.products.each(function (product) {
         expect(product).to.have.property('price')
