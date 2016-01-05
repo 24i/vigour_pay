@@ -77,6 +77,7 @@ module.exports = function payTests (inject, type) {
       var labelText = document.createTextNode(label)
       buybutton.appendChild(labelText)
       buybutton.onclick = function clickBuy () {
+        console.log('buy!', labelText)
         product.owned.val = true
       }
       buying.appendChild(buybutton)
@@ -95,6 +96,7 @@ module.exports = function payTests (inject, type) {
     var doneButton = document.createElement('button')
     var labelText = document.createTextNode('bought everything!')
     doneButton.onclick = function clickDone () {
+      console.log('---- bought all?')
       console.log('total', total)
       console.log('bought', bought)
       expect(total).equals(bought)
