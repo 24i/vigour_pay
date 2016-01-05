@@ -82,6 +82,7 @@ module.exports = function payTests (inject, type) {
       buying.appendChild(buybutton)
       total++
       product.owned.once('data', function (data) {
+        console.log('bought!', product.path)
         expect(this.val).to.be.true
         expect(this.receipt).to.be.ok.and.have.property('val').which.is.ok
         bought++
@@ -94,6 +95,8 @@ module.exports = function payTests (inject, type) {
     var doneButton = document.createElement('button')
     var labelText = document.createTextNode('bought everything!')
     doneButton.onclick = function clickDone () {
+      console.log('total', total)
+      console.log('bought', bought)
       expect(total).equals(bought)
       done()
     }
