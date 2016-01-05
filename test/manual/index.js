@@ -11,6 +11,6 @@ if (!env.isNative.val) {
 
 describe('Pay manual tests', function () {
   this.bail(true)
-  this.timeout(25000)
+  this.timeout(60000)
   tests(inject)
 })

@@ -28,9 +28,6 @@ module.exports = function payTests (inject, type) {
       }
       console.error('create new pay with inject')
       pay = window.PAY = new pay.Constructor(inject)
-      pay.on('error', function (err) {
-        throw err
-      })
       if (inject.store === 'testStore') {
         // fake ready from native side
         pay._platform.ready.val = true
@@ -42,6 +39,13 @@ module.exports = function payTests (inject, type) {
       }
     })
   }
+
+  it('should throw on errors in pay', function () {
+    pay.on('error', function (err) {
+      console.error('pay error in tests!', err)
+      throw err
+    })
+  })
 
   it('should have products', function () {
     expect(pay.products).to.have.property('single')
@@ -66,25 +70,38 @@ module.exports = function payTests (inject, type) {
   it('should buy products', function (done) {
     var total = 0
     var bought = 0
+    var buying = document.createElement('div')
 
     pay.products.each(function (product, label) {
-      total++
-      try {
-        product.owned.once('data', function (data) {
-          expect(this.val).to.be.true
-          expect(this.receipt).to.be.ok.and.have.property('val').which.is.ok
-          if (++bought === total) {
-            done()
-          }
-        })
+      var buybutton = document.createElement('button')
+      var labelText = document.createTextNode(label)
+      buybutton.appendChild(labelText)
+      buybutton.onclick = function clickBuy () {
         product.owned.val = true
-      } catch (err) {
-        console.log(err.stack)
-        throw err
       }
+      buying.appendChild(buybutton)
+      total++
+      product.owned.once('data', function (data) {
+        expect(this.val).to.be.true
+        expect(this.receipt).to.be.ok.and.have.property('val').which.is.ok
+        bought++
+      })
     })
 
     expect(total).to.be.ok
+
+    var nextP = document.createElement('p')
+    var doneButton = document.createElement('button')
+    var labelText = document.createTextNode('bought everything!')
+    doneButton.onclick = function clickDone () {
+      expect(total).equals(bought)
+      done()
+    }
+    doneButton.appendChild(labelText)
+    nextP.appendChild(doneButton)
+    buying.appendChild(nextP)
+
+    document.body.insertBefore(buying, document.body.firstChild)
   })
 }
 
