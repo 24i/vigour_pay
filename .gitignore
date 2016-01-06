@@ -11,5 +11,3 @@ bundles
 */build.*
 *.iml
 native/android/pay/.idea/
-
-*.iml
