@@ -9,3 +9,7 @@ bundles
 !test/node_modules
 */build/*
 */build.*
+*.iml
+native/android/pay/.idea/
+
+*.iml

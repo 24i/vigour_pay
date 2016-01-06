@@ -25,22 +25,8 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="hidden"
-            android:text="hidden"
-            />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="top"
-            android:text="top"
-            />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="over"
-            android:text="over"
+            android:onClick="getProducts"
+            android:text="getProducts"
             />
 
         <Space
@@ -50,56 +36,23 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="black"
-            android:text="black"
+            android:onClick="buySingle"
+            android:text="buySingle"
             />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="white"
-            android:text="white"
+            android:onClick="buyMonthly"
+            android:text="buyMonthly"
             />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="purple"
-            android:text="purple"
+            android:onClick="buyYearly"
+            android:text="buyYearly"
             />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="lime"
-            android:text="lime"
-            />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="alpha0"
-            android:text="alpha: 0"
-            />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="alpha1"
-            android:text="alpha: 1"
-            />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="alpha04"
-            android:text="alpha: 0.4"
-            />
-
 
     </LinearLayout>
 </ScrollView>
