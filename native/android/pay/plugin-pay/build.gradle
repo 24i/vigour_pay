@@ -1,0 +1,78 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 21
+        versionCode 2
+        versionName "0.2"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+}
+
+dependencies {
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'io.vigour:plugin-core:0.6.3'
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.fasterxml.jackson.jr:jackson-jr-objects:2.5.1'
+}
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+}
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'plugin-statusbar'
+
+    publishedGroupId = 'io.vigour'
+    libraryName = 'Status bar'
+    artifact = 'plugin-statusbar'
+
+    libraryDescription = 'android vigour plugin that allows accessing status bar properties'
+
+    siteUrl = 'https://github.com/vigour-io/plugin-status-bar'
+    gitUrl = 'https://github.com/vigour-io/plugin-status-bar.git'
+
+    libraryVersion = '0.3.5'
+
+    developerId = 'vigour'
+    developerName = 'Michiel van Liempt'
+    developerEmail = 'dev@vigour.io'
+
+    dryRun = true
+
+    licenseName = 'The MIT License'
+    licenseUrl = 'http://opensource.org/licenses/mit-license.php'
+    allLicenses = ["MIT"]
+}
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
