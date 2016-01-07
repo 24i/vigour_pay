@@ -6,20 +6,10 @@
   "vigour": {
     "pay": {
       "android": {
-        "billingKey": "SUPASECRETwhatevs",
         "products": {
-          "single": {
-            "val": "mtv-play_single_episode_purchase",
-            "type": "single-purchase"
-          },
-          "monthly": {
-            "val": "mtvplay_subscription_monthly",
-            "type": "monthly-recurring-subscription"
-          },
-          "yearly": {
-            "val": "mtvplay_single_purchase",
-            "type": "yearly-recurring-subscription"
-          }
+          "single": "mtvplay_android_single",
+          "monthly": "mtvplay_android_monthly",
+          "yearly": "mtvplay_android_yearly"
         }
       },
       "ios": {
