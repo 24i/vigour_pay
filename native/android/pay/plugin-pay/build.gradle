@@ -20,6 +20,11 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
     }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
 }
 
 dependencies {
@@ -31,6 +36,7 @@ dependencies {
 
 task androidJavadocs(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
+    classpath = configurations.compile
 }
 
 task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
@@ -61,7 +67,7 @@ ext {
     siteUrl = 'https://github.com/vigour-io/plugin-status-bar'
     gitUrl = 'https://github.com/vigour-io/plugin-status-bar.git'
 
-    libraryVersion = '0.0.1'
+    libraryVersion = '0.0.2'
 
     developerId = 'vigour'
     developerName = 'Michiel van Liempt'

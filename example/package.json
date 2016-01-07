@@ -36,5 +36,24 @@
       "monthly": "{region}_monthly_teststore_id",
       "yearly": "{region}_annual_teststore_id"
     }
+  },
+  "vigour": {
+    "native": {
+      "platforms": {
+        "android": {
+          "productName": "Pay Example",
+          "applicationId": "io.vigour.pay-test",
+          "appIndexPath": "build.html",
+          "keystoreFile": "example.keystore",
+          "keystorePassword": "shmexample",
+          "keystoreAlias": "blabla",
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true
+          }
+        }
+      }
+    }
   }
 }

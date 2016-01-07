@@ -21,6 +21,7 @@ import java.util.Map;
 import io.vigour.nativewrapper.plugin.core.Plugin;
 import io.vigour.plugin.pay.util.IabHelper;
 import io.vigour.plugin.pay.util.IabResult;
+import io.vigour.plugin.statusbar.R;
 
 /**
  * Created by michielvanliempt on 09/04/15.
@@ -34,8 +35,8 @@ public class PayPlugin extends Plugin {
     public PayPlugin(Context context) {
         super("pay");
 
-
-        String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk/28zyBFmP0Wexr32L/X3iQvSvMVs4M3DKE4kZunjKYnpl8uwYuNSxs4Alog430LQ70j9SfQho5ptk0yPcArgthUJXETsqZYoWMF7lLRDtEg9y1Dc13Fv2iqcWbJN0cULg65ZZbJQ+H0xRE6ttk9oehVl7GbO96T9DtAkJZYa63kwbxLLAdSYSmFMo2Pr7sBuXzR2LEKjfqXzLKX6JL2y891csaVzJmn2kh4RQuwwnJFVQtv+2k6hKnm7RI2D7tq6bDOgtUDDOmk3ZaF03iToEObq+ccvVoGOmacyUpsI+YnAlt44fRFjG3WVYaBmhd/CZbpIrZqt3PVR9PDZnVYOwIDAQAB"; // mtv packer
+        String base64EncodedPublicKey = context.getResources().getString(R.string.billingKey);
+        Log.d("billing key", base64EncodedPublicKey);
 
         // compute your public key and store it in base64EncodedPublicKey
         helper = new IabHelper(context, base64EncodedPublicKey);

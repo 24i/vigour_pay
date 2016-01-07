@@ -58,9 +58,8 @@
     },
     "plugin": {
       "android": {
-        "skipInstall": true,
-        "className": "io.vigour.pay",
-        "instantiation": "new Pay(this, webview)"
+        "className": "io.vigour.plugin.pay.PayPlugin",
+        "instantiation": "new PayPlugin(this)"
       }
     }
   },

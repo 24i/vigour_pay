@@ -64,12 +64,15 @@
           }
         },
         "android": {
-          "debug": true,
+          "debug": false,
           "run": true,
-          "productName": "Orientation Tests",
-          "applicationId": "io.vigour.orientation",
+          "productName": "Pay Tests",
+          "applicationId": "io.vigour.paytest",
           "appIndexPath": "build.html",
           "splashDuration": "0",
+          "strings": {
+            "billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsVJDJDc37L5uM0Aj7B0mMfYloeEVhLmIRFc1OBW4mThWirXFkySrrUIpWpRwFZ+MOHVw2+1gp7gbNE8BCxQgNHfQsp2uXazUszXFufy+/0wvzD/3XwtxlIjv/3EdFMsXP0a3uckH4QLSRGKA1TNFAX3WpS7p+RoQSMnoz7VByC4uBgSydOShCMHy5YZ7TBbwk451RkuU/qxA4USRdUXT2EUcFLgO7UpLtNAt1BJY0X1/x0vaLAfrIK3On3Pl26qYJTdl8HOEP9msouSE6jGQZbN0dUDPwlyQIZmcejbGxrVJpqTuXmEm0q2p1YU2Kz0j9yiyUtqexjmgCTceE7tW8wIDAQAB"
+          },
           "assets": {
             "build.html": true,
             "build.js": true,
@@ -97,4 +100,3 @@
     ]
   }
 }
-
