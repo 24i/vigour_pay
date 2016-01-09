@@ -1,5 +1,8 @@
 {
   "name": "pay-tests",
+  "dependencies": {
+    "vigour-pay": "../"
+  },
   "gaston": {
     "package": true
   },
