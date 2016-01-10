@@ -1,7 +1,6 @@
 package io.vigour.plugin.example;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -10,11 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.vigour.plugin.pay.PayPlugin;
-import io.vigour.plugin.statusbar.MapWrapper;
-import io.vigour.plugin.statusbar.StatusBarPlugin;
-
 
 public class MainActivity extends Activity {
+
+    public static final String SINGLE = "mtvplay_android_single";
+    public static final String MONTH = "mtvplay_android_monthly";
+    public static final String YEAR = "mtvplay_android_yearly";
 
     PayPlugin plugin;
     TextView textView;
@@ -29,21 +29,35 @@ public class MainActivity extends Activity {
 
     public void getProducts(View v) {
         textView.setText("clicked getProducts");
-        textView.setText(plugin.getProducts("{}"));
+        try {
+            Map<String, String> map = new HashMap<>();
+            map.put("single", SINGLE);
+            map.put("monthly", MONTH);
+            map.put("yearly", YEAR);
+            textView.setText(plugin.getProducts(map));
+        } catch (Exception e) {
+            textView.setText(e.getMessage());
+        }
     }
 
     public void buySingle(View v) {
         textView.setText("clicked buySingle");
-        textView.setText(plugin.buy("single"));
+        buy(SINGLE);
     }
 
     public void buyMonthly(View v) {
         textView.setText("clicked buyMonthly");
-        textView.setText(plugin.buy("monthly"));
+        buy(MONTH);
     }
 
     public void buyYearly(View v) {
         textView.setText("clicked buyYearly");
-        textView.setText(plugin.buy("yearly"));
+        buy(YEAR);
+    }
+
+    private void buy(String id) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id);
+        textView.setText(plugin.buy(map));
     }
 }

@@ -14,9 +14,13 @@ import android.view.WindowManager;
 
 //import com.fasterxml.jackson.jr.ob.JSON;
 
+import com.fasterxml.jackson.jr.ob.JSON;
+import com.fasterxml.jackson.jr.ob.JSONObjectException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +29,8 @@ import io.vigour.plugin.pay.util.IabException;
 import io.vigour.plugin.pay.util.IabHelper;
 import io.vigour.plugin.pay.util.IabResult;
 import io.vigour.plugin.pay.util.Inventory;
+import io.vigour.plugin.pay.util.Purchase;
+import io.vigour.plugin.pay.util.SkuDetails;
 import io.vigour.plugin.statusbar.R;
 
 /**
@@ -32,14 +38,18 @@ import io.vigour.plugin.statusbar.R;
  */
 public class PayPlugin extends Plugin {
 
+    public static final int PURCHASE_REQUEST_CODE = 0x8a7; //"8a7" looks like "pay", right?
+
     private static final String TAG = "pay";
     private final IabHelper helper;
-    public static final int PURCHASE_REQUEST_CODE = 1;
+    Inventory inventory;
+    Activity context;
 
-    public PayPlugin(Context context) {
+    public PayPlugin(Activity context) {
         super("pay");
         Log.d(TAG, "calling plugin c'tor");
 
+        this.context = context;
         String base64EncodedPublicKey = context.getResources().getString(R.string.billingKey);
         Log.d(TAG, base64EncodedPublicKey);
 
@@ -58,24 +68,45 @@ public class PayPlugin extends Plugin {
 
     }
 
-    public String getProducts(Object items) {
+    public String getProducts(Object items) throws IabException, IOException {
         Log.d(TAG, "called getProducts with " + items.toString());
         Log.d(TAG, items.toString());
-        try {
-            final List<String> skus = Arrays.asList("mtvplay_android_single",
-                                                    "mtvplay_android_monthly",
-                                                    "mtvplay_android_yearly");
-            final Inventory inventory = helper.queryInventory(true, skus);
-            return inventory.toDebugString();
-        } catch (IabException e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
+
+        final List<String> skus = Arrays.asList("mtvplay_android_single",
+                                                "mtvplay_android_monthly",
+                                                "mtvplay_android_yearly");
+        inventory = helper.queryInventory(true, skus);
+        Map<String, Object> map = new HashMap<>();
+        map.put("mtvplay_android_single", inventory.getSkuDetails("mtvplay_android_single"));
+        map.put("mtvplay_android_monthly", inventory.getSkuDetails("mtvplay_android_monthly"));
+        map.put("mtvplay_android_yearly", inventory.getSkuDetails("mtvplay_android_yearly"));
+        return JSON.std.asString(map);
     }
 
-    public String buy(Object productId) {
-        Log.d(TAG, "called buy with " + productId.toString());
-        return productId.toString();
+    public String buy(Map<String, String> product) {
+        Log.d(TAG, "called buy with " + product.toString());
+        SkuDetails details = inventory.getSkuDetails(product.get("id"));
+        if (details == null) {
+            Log.w(TAG, "can't find details for " + product);
+        }
+        String message = String.format("buying %s...", details.getType(), details.getSku());
+        Log.d(TAG, message);
+        if (helper.isAsyncInProgress()) {
+            Log.d(TAG, "can't buy: async in progress...");
+            return "error";
+        }
+        Log.d(TAG, "buying...");
+        helper.launchPurchaseFlow(context, details.getSku(), details.getType(), PURCHASE_REQUEST_CODE, new IabHelper.OnIabPurchaseFinishedListener() {
+            @Override
+            public void onIabPurchaseFinished(IabResult result, Purchase info) {
+                Log.i(TAG, "buy result: " + result + " --> " + info);
+            }
+        }, null);
+        return "wait for it....";
+    }
+
+    public void onDestroy() {
+        if (helper != null) helper.dispose();
     }
 
     /*
@@ -86,10 +117,6 @@ public class PayPlugin extends Plugin {
         else {
             Log.d(TAG, "onActivityResult handled by IABUtil.");
         }
-    }
-
-    public void onDestroy() {
-        if (helper != null) helper.dispose();
     }
 
     public String listItems() {
@@ -127,19 +154,6 @@ public class PayPlugin extends Plugin {
     }
 
     public void buyItem(SkuDetails details) {
-        String toast = String.format("buying %s %s...", details.getType(), details.getSku());
-        toast(toast);
-        if (mHelper.isAsyncInProgress()) {
-            debug("can't buy: async in progress...");
-            return;
-        }
-        debug("buying...");
-        mHelper.launchPurchaseFlow(this, details.getSku(), details.getType(), PURCHASE_REQUEST_CODE, new IabHelper.OnIabPurchaseFinishedListener() {
-            @Override
-            public void onIabPurchaseFinished(IabResult result, Purchase info) {
-                onResult(result);
-            }
-        }, null);
     }
 
 

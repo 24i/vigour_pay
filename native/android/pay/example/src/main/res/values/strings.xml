@@ -3,4 +3,5 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="billingKey">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsVJDJDc37L5uM0Aj7B0mMfYloeEVhLmIRFc1OBW4mThWirXFkySrrUIpWpRwFZ+MOHVw2+1gp7gbNE8BCxQgNHfQsp2uXazUszXFufy+/0wvzD/3XwtxlIjv/3EdFMsXP0a3uckH4QLSRGKA1TNFAX3WpS7p+RoQSMnoz7VByC4uBgSydOShCMHy5YZ7TBbwk451RkuU/qxA4USRdUXT2EUcFLgO7UpLtNAt1BJY0X1/x0vaLAfrIK3On3Pl26qYJTdl8HOEP9msouSE6jGQZbN0dUDPwlyQIZmcejbGxrVJpqTuXmEm0q2p1YU2Kz0j9yiyUtqexjmgCTceE7tW8wIDAQAB</string>
 </resources>
