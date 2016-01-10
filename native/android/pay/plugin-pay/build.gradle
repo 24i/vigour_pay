@@ -29,9 +29,8 @@ android {
 
 dependencies {
     compile 'io.vigour:plugin-core:0.6.3'
-    compile 'com.fasterxml.jackson.jr:jackson-jr-objects:2.5.1'
-    compile 'com.google.android.gms:play-services:8.4.0'
-    compile 'com.android.support:appcompat-v7:23.1.1'
+//    compile 'com.fasterxml.jackson.jr:jackson-jr-objects:2.5.1'
+//    compile 'com.google.android.gms:play-services:8.4.0'
 }
 
 task androidJavadocs(type: Javadoc) {
@@ -56,7 +55,7 @@ artifacts {
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'plugin-statusbar'
+    bintrayName = 'plugin-pay'
 
     publishedGroupId = 'io.vigour'
     libraryName = 'Pay'
@@ -67,7 +66,7 @@ ext {
     siteUrl = 'https://github.com/vigour-io/plugin-status-bar'
     gitUrl = 'https://github.com/vigour-io/plugin-status-bar.git'
 
-    libraryVersion = '0.0.2'
+    libraryVersion = '0.1.0'
 
     developerId = 'vigour'
     developerName = 'Michiel van Liempt'

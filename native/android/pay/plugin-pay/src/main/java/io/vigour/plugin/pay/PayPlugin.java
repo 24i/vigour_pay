@@ -12,15 +12,19 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.fasterxml.jackson.jr.ob.JSON;
+//import com.fasterxml.jackson.jr.ob.JSON;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import io.vigour.nativewrapper.plugin.core.Plugin;
+import io.vigour.plugin.pay.util.IabException;
 import io.vigour.plugin.pay.util.IabHelper;
 import io.vigour.plugin.pay.util.IabResult;
+import io.vigour.plugin.pay.util.Inventory;
 import io.vigour.plugin.statusbar.R;
 
 /**
@@ -34,9 +38,10 @@ public class PayPlugin extends Plugin {
 
     public PayPlugin(Context context) {
         super("pay");
+        Log.d(TAG, "calling plugin c'tor");
 
         String base64EncodedPublicKey = context.getResources().getString(R.string.billingKey);
-        Log.d("billing key", base64EncodedPublicKey);
+        Log.d(TAG, base64EncodedPublicKey);
 
         // compute your public key and store it in base64EncodedPublicKey
         helper = new IabHelper(context, base64EncodedPublicKey);
@@ -53,22 +58,24 @@ public class PayPlugin extends Plugin {
 
     }
 
-    public String getProducts(String info) {
-        return "{\n" +
-               "    \"testRegion_single_test\": {\n" +
-               "      \"price\": 0.99\n" +
-               "    },\n" +
-               "    \"testRegion_monthly_test\": {\n" +
-               "      \"price\": 4.99\n" +
-               "    },\n" +
-               "    \"testRegion_yearly_test\": {\n" +
-               "      \"price\": 14.99\n" +
-               "    }\n" +
-               "  }";
+    public String getProducts(Object items) {
+        Log.d(TAG, "called getProducts with " + items.toString());
+        Log.d(TAG, items.toString());
+        try {
+            final List<String> skus = Arrays.asList("mtvplay_android_single",
+                                                    "mtvplay_android_monthly",
+                                                    "mtvplay_android_yearly");
+            final Inventory inventory = helper.queryInventory(true, skus);
+            return inventory.toDebugString();
+        } catch (IabException e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
     }
 
-    public String buy(String productId) {
-        return productId;
+    public String buy(Object productId) {
+        Log.d(TAG, "called buy with " + productId.toString());
+        return productId.toString();
     }
 
     /*
