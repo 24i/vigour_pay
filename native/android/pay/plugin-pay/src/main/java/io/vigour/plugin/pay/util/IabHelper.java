@@ -71,7 +71,7 @@ import java.util.List;
  */
 public class IabHelper {
     // Is debug logging enabled?
-    boolean mDebugLog = true;
+    boolean mDebugLog = false;
     String mDebugTag = "IabHelper";
 
     // Is setup done?
