@@ -22,7 +22,6 @@ var plain = require('vigour-js/lib/methods/plain')
 var Observable = require('vigour-js/lib/base')
 Observable.prototype.inject(plain)
 
-
 var script_testing = document.createElement('script')
 const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'
 document.getElementsByTagName('head')[0].appendChild(script_testing)
@@ -33,5 +32,18 @@ script_testing.onload = () => {
   amzn_wa.enableApiTester(amzn_wa_tester)
 }
 
+var App = require('vigour-element/lib/app')
+
 window.pay = pay
 // debugger
+
+var Input = new Element({
+  node: 'input'
+}).Constructor
+
+var app = new App({
+  node: document.body,
+  holder: {
+    input: new Input()
+  }
+})
