@@ -13,10 +13,9 @@ Element.prototype.inject(
   require('vigour-element/lib/events/click')
 )
 
-// require facebook
+var App = require('vigour-element/lib/app')
 var pay = require('../lib/')
 // pay.init()
-// console.clear()
 
 var plain = require('vigour-js/lib/methods/plain')
 var Observable = require('vigour-js/lib/base')
@@ -32,18 +31,48 @@ script_testing.onload = () => {
   amzn_wa.enableApiTester(amzn_wa_tester)
 }
 
-var App = require('vigour-element/lib/app')
-
 window.pay = pay
-// debugger
 
-var Input = new Element({
-  node: 'input'
+console.clear()
+var Monthly = new Element({
+  node: 'button',
+  text: pay.products.monthly.val
 }).Constructor
+
+var Yearly = new Element({
+  node: 'button',
+  text: pay.products.yearly.val
+}).Constructor
+
+var Single = new Element({
+  node: 'button',
+  text: pay.products.single.val
+}).Constructor
+
 
 var app = new App({
   node: document.body,
   holder: {
-    input: new Input()
+    month: new Monthly(),
+    year: new Yearly(),
+    single: new Single()
   }
 })
+
+
+var month = document.getElementsByClassName('month')[0]
+var year = document.getElementsByClassName('year')[0]
+var single = document.getElementsByClassName('single')[0]
+
+month.onclick = function (argument) {
+  pay.products.monthly.owned.val = true
+}
+
+year.onclick = function (argument) {
+  pay.products.yearly.owned.val = true
+}
+
+single.onclick = function (argument) {
+  pay.products.single.owned.val = true
+}
+
