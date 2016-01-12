@@ -30,6 +30,7 @@ android {
 dependencies {
     compile 'io.vigour:plugin-core:0.6.3'
     compile 'com.fasterxml.jackson.jr:jackson-jr-objects:2.5.1'
+    compile 'io.reactivex:rxandroid:1.1.0'
 }
 
 task androidJavadocs(type: Javadoc) {
@@ -65,7 +66,7 @@ ext {
     siteUrl = 'https://github.com/vigour-io/plugin-status-bar'
     gitUrl = 'https://github.com/vigour-io/plugin-status-bar.git'
 
-    libraryVersion = '0.2.0'
+    libraryVersion = '0.3.0'
 
     developerId = 'vigour'
     developerName = 'Michiel van Liempt'

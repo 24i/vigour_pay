@@ -71,7 +71,7 @@ import java.util.List;
  */
 public class IabHelper {
     // Is debug logging enabled?
-    boolean mDebugLog = false;
+    boolean mDebugLog = true;
     String mDebugTag = "IabHelper";
 
     // Is setup done?
@@ -506,7 +506,7 @@ public class IabHelper {
         }
         else if (resultCode == Activity.RESULT_CANCELED) {
             logDebug("Purchase canceled - Response: " + getResponseDesc(responseCode));
-            result = new IabResult(IABHELPER_USER_CANCELLED, "User canceled.");
+            result = new IabResult(responseCode, "User canceled.");
             if (mPurchaseListener != null) mPurchaseListener.onIabPurchaseFinished(result, null);
         }
         else {
@@ -652,7 +652,7 @@ public class IabHelper {
      * @param itemInfo The PurchaseInfo that represents the item to consume.
      * @throws IabException if there is a problem during consumption.
      */
-    void consume(Purchase itemInfo) throws IabException {
+    public void consume(Purchase itemInfo) throws IabException {
         checkNotDisposed();
         checkSetupDone("consume");
 
