@@ -4,37 +4,32 @@
 
 require('./style.less')
 var Element = require('vigour-element')
-Element.prototype.inject(
-  require('vigour-element/lib/property/text'),
-  require('vigour-element/lib/property/transform'),
-  require('vigour-element/lib/property/css'),
-  require('vigour-element/lib/property/attributes'),
-  require('vigour-element/lib/events/render'),
-  require('vigour-element/lib/events/click')
-)
 
-var App = require('vigour-element/lib/app')
+var app = require('vigour-element/lib/app')
+
+console.log('------------------ require pay')
 var pay = require('../lib/')
+console.log('------------------ required pay')
 
 var plain = require('vigour-js/lib/methods/plain')
 var Observable = require('vigour-js/lib/base')
 Observable.prototype.inject(plain)
 
+if (navigator && /amazon-fireos|AmazonWebAppPlatform|; AFT/.test(navigator.userAgent)) {
+  // testing sdk not necessary for production
+  var script_testing = document.createElement('script')
+  const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'
+  document.getElementsByTagName('head')[0].appendChild(script_testing)
+  script_testing.src = AMAZON_WEB_API_TESTING
+  script_testing.id = 'amazon-script-testing'
 
-//testing sdk not necessary for production
-var script_testing = document.createElement('script')
-const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'
-document.getElementsByTagName('head')[0].appendChild(script_testing)
-script_testing.src = AMAZON_WEB_API_TESTING
-script_testing.id = 'amazon-script-testing'
-
-script_testing.onload = () => {
-  amzn_wa.enableApiTester(amzn_wa_tester)
+  script_testing.onload = () => {
+    amzn_wa.enableApiTester(amzn_wa_tester)
+  }
 }
 
 window.pay = pay
 
-console.clear()
 var Monthly = new Element({
   node: 'button',
   text: pay.products.monthly.val
@@ -52,10 +47,10 @@ var Single = new Element({
 
 var Clearproducts = new Element({
   node: 'button',
-  text: "Clear your purchases"
+  text: 'Clear your purchases'
 }).Constructor
 
-var app = new App({
+app.set({
   node: document.body,
   holder: {
     month: new Monthly(),
@@ -65,11 +60,11 @@ var app = new App({
   }
 })
 
-pay.on('bought',function (receipt) {
-  console.log('----bougth receipt confirmation ---',receipt)
+pay.on('bought', function (receipt) {
+  console.log('----bougth receipt confirmation ---', receipt)
 })
-pay.on('error',function (error) {
-  console.error('error when buying item ------   ', error.key )
+pay.on('error', function (error) {
+  console.error('error when buying item ------   ', error.key)
 })
 
 var month = document.getElementsByClassName('month')[0]
@@ -78,7 +73,7 @@ var single = document.getElementsByClassName('single')[0]
 var clearproducts = document.getElementsByClassName('clearproducts')[0]
 
 clearproducts.onclick = function () {
-  localStorage.clear();
+  localStorage.clear()
   console.log('localstorage is empty now!----')
 }
 
@@ -93,4 +88,3 @@ year.onclick = function (argument) {
 single.onclick = function (argument) {
   pay.products.single.owned.val = true
 }
-

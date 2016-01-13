@@ -27,11 +27,11 @@
         },
         "src": "https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API.min.js"
       },
-      "testStore": {
+      "mockStore": {
         "products": {
-          "single": "{region}_single_test",
-          "monthly": "{region}_monthly_test",
-          "yearly": "{region}_yearly_test"
+          "single": "single_mock",
+          "monthly": "monthly_mock",
+          "yearly": "yearly_mock"
         }
       }
     },
@@ -52,5 +52,18 @@
         }
       }
     }
+  },
+  "standard": {
+    "globals": [
+      "before",
+      "describe",
+      "it",
+      "beforeEach",
+      "sinon",
+      "expect",
+      "xit",
+      "chai",
+      "amzn_wa"
+    ]
   }
 }
