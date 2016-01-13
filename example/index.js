@@ -50,24 +50,37 @@ var Single = new Element({
   text: pay.products.single.val
 }).Constructor
 
+var Clearproducts = new Element({
+  node: 'button',
+  text: "Clear your purchases"
+}).Constructor
 
 var app = new App({
   node: document.body,
   holder: {
     month: new Monthly(),
     year: new Yearly(),
-    single: new Single()
+    single: new Single(),
+    clearproducts: new Clearproducts()
   }
 })
 
-
-
 pay.on('bought',function (receipt) {
-  console.log(receipt)
+  console.log('----bougth receipt confirmation ---',receipt)
 })
+pay.on('error',function (error) {
+  console.error('error when buying item ------   ', error.key )
+})
+
 var month = document.getElementsByClassName('month')[0]
 var year = document.getElementsByClassName('year')[0]
 var single = document.getElementsByClassName('single')[0]
+var clearproducts = document.getElementsByClassName('clearproducts')[0]
+
+clearproducts.onclick = function () {
+  localStorage.clear();
+  console.log('localstorage is empty now!----')
+}
 
 month.onclick = function (argument) {
   pay.products.monthly.owned.val = true
