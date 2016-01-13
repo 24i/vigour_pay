@@ -15,12 +15,13 @@ Element.prototype.inject(
 
 var App = require('vigour-element/lib/app')
 var pay = require('../lib/')
-// pay.init()
 
 var plain = require('vigour-js/lib/methods/plain')
 var Observable = require('vigour-js/lib/base')
 Observable.prototype.inject(plain)
 
+
+//testing sdk not necessary for production
 var script_testing = document.createElement('script')
 const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'
 document.getElementsByTagName('head')[0].appendChild(script_testing)
@@ -60,6 +61,10 @@ var app = new App({
 })
 
 
+
+pay.on('bought',function (receipt) {
+  console.log(receipt)
+})
 var month = document.getElementsByClassName('month')[0]
 var year = document.getElementsByClassName('year')[0]
 var single = document.getElementsByClassName('single')[0]
