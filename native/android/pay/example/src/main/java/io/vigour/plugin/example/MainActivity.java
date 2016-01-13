@@ -1,6 +1,7 @@
 package io.vigour.plugin.example;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.vigour.plugin.pay.PayPlugin;
+import rx.functions.Action1;
 
 public class MainActivity extends Activity {
 
@@ -58,6 +60,21 @@ public class MainActivity extends Activity {
     private void buy(String id) {
         Map<String, String> map = new HashMap<>();
         map.put("id", id);
-        textView.setText(plugin.buy(map));
+        textView.setText("buying...");
+        plugin.buy(map).subscribe(new Action1<String>() {
+                                      @Override public void call(String s) {
+                                          textView.setText(s);
+                                      }
+                                  },
+                                  new Action1<Throwable>() {
+                                      @Override public void call(Throwable throwable) {
+                                          textView.setText("error: " + throwable.getMessage());
+                                      }
+                                  });
+    }
+
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        plugin.onActivityResult(requestCode, resultCode, data);
     }
 }
