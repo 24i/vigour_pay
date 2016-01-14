@@ -42,7 +42,7 @@
       "debug": true,
       "platforms": {
         "ios": {
-          "productName": "Orientation Tests",
+          "productName": "Pay Tests",
           "organizationName": "Vigour",
           "organizationIdentifier": "io.vigour.test",
           "buildNumber": "1",
