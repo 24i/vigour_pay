@@ -7,9 +7,9 @@ var Element = require('vigour-element')
 
 var app = require('vigour-element/lib/app')
 
-console.log('------------------ require pay')
+// console.log('------------------ require pay')
 var pay = require('../lib/')
-console.log('------------------ required pay')
+// console.log('------------------ required pay')
 
 var plain = require('vigour-js/lib/methods/plain')
 var Observable = require('vigour-js/lib/base')
@@ -61,10 +61,10 @@ app.set({
 })
 
 pay.on('bought', function (receipt) {
-  console.log('----bougth receipt confirmation ---', receipt)
+  // console.log('----bougth receipt confirmation ---', receipt)
 })
 pay.on('error', function (error) {
-  console.error('error when buying item ------   ', error.key)
+  // console.error('error when buying item ------   ', error.key)
 })
 
 var month = document.getElementsByClassName('month')[0]
@@ -74,7 +74,7 @@ var clearproducts = document.getElementsByClassName('clearproducts')[0]
 
 clearproducts.onclick = function () {
   localStorage.clear()
-  console.log('localstorage is empty now!----')
+  // console.log('localstorage is empty now!----')
 }
 
 month.onclick = function (argument) {

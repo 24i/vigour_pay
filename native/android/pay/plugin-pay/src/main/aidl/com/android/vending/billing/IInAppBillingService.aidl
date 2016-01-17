@@ -77,7 +77,7 @@ interface IInAppBillingService {
      * the type, a unique purchase token and an optional developer payload.
      * @param apiVersion billing API version that the app is using
      * @param packageName package name of the calling app
-     * @param sku the SKU of the in-app item as published in the developer console
+     * @param sku the SKU of the in-app item as published in the developer // console
      * @param type the type of the in-app item ("inapp" for one-time purchases
      *        and "subs" for subscription).
      * @param developerPayload optional argument to be sent back with the purchase information

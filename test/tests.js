@@ -9,11 +9,11 @@ module.exports = function payTests (inject, type) {
 
   it('require pay', function () {
     try {
-      console.log('craete pay')
+      // console.log('craete pay')
       pay = window.PAY = require('../lib')
       // pay = require('../lib')
     } catch (err) {
-      console.log(err.stack)
+      // console.log(err.stack)
       throw err
     }
   })
@@ -26,7 +26,7 @@ module.exports = function payTests (inject, type) {
         inject.store = 'testStore'
         inject.region = 'testRegion'
       }
-      console.error('create new pay with inject')
+      // console.error('create new pay with inject')
       pay = window.PAY = new pay.Constructor(inject)
       if (inject.store === 'testStore') {
         // fake ready from native side
@@ -42,7 +42,7 @@ module.exports = function payTests (inject, type) {
 
   it('should throw on errors in pay', function () {
     pay.on('error', function (err) {
-      console.error('pay error in tests!', err)
+      // console.error('pay error in tests!', err)
       throw err
     })
   })
@@ -57,9 +57,9 @@ module.exports = function payTests (inject, type) {
   })
 
   it('should be verifying products', function (done) {
-    // console.log('pay.ready.val', pay.ready.val, inject)
+    // // console.log('pay.ready.val', pay.ready.val, inject)
     pay.validated.is(true, function (val) {
-      // console.log('wat ready')
+      // // console.log('wat ready')
       pay.products.each(function (product) {
         expect(product).to.have.property('price')
       })
@@ -77,13 +77,13 @@ module.exports = function payTests (inject, type) {
       var labelText = document.createTextNode(label)
       buybutton.appendChild(labelText)
       buybutton.onclick = function clickBuy () {
-        console.log('buy!', labelText)
+        // console.log('buy!', labelText)
         product.owned.val = true
       }
       buying.appendChild(buybutton)
       total++
       product.owned.once('data', function (data) {
-        console.log('bought!', product.path)
+        // console.log('bought!', product.path)
         expect(this.val).to.be.true
         expect(this.receipt).to.be.ok.and.have.property('val').which.is.ok
         bought++
@@ -96,9 +96,9 @@ module.exports = function payTests (inject, type) {
     var doneButton = document.createElement('button')
     var labelText = document.createTextNode('bought everything!')
     doneButton.onclick = function clickDone () {
-      console.log('---- bought all?')
-      console.log('total', total)
-      console.log('bought', bought)
+      // console.log('---- bought all?')
+      // console.log('total', total)
+      // console.log('bought', bought)
       expect(total).equals(bought)
       done()
     }
@@ -111,7 +111,7 @@ module.exports = function payTests (inject, type) {
 }
 
 function injectAmazonTestSDK (cb) {
-  console.log('inject dat amazon test SDK shizle')
+  // console.log('inject dat amazon test SDK shizle')
   var script_testing = document.createElement('script')
   script_testing.src = AMAZON_WEB_API_TESTING
   script_testing.id = 'amazon-script-testing'
