@@ -1,43 +1,40 @@
 {
-  "android": {
-    "billingKey": "SUPASECRETwhatevs",
-    "products": {
-      "single": {
-        "val": "mtv-play_single_episode_purchase",
-        "type": "single-purchase"
-      },
-      "monthly": {
-        "val": "mtvplay_subscription_monthly",
-        "type": "monthly-recurring-subscription"
-      },
-      "yearly": {
-        "val": "mtvplay_single_purchase",
-        "type": "yearly-recurring-subscription"
-      }
-    }
-  },
-  "iOS": {
-    "products": {
-      "single": "{region}_single_purchase",
-      "monthly": "{region}_subscription_monthly",
-      "yearly": "{region}_subscription_annual"
-    }
-  },
-  "amazon": {
-    "products": {
-      "single": "amazon_single_id",
-      "monthly": "amazon_monthly_id",
-      "yearly": "amazon_yearly_id"
-    }
-  },
-  "test": {
-    "products": {
-      "single": "{region}_single_teststore_id",
-      "monthly": "{region}_monthly_teststore_id",
-      "yearly": "{region}_annual_teststore_id"
-    }
+  "name": "pay example app",
+  "gaston": {
+    "package": true
   },
   "vigour": {
+    "pay":  {
+      "android": {
+        "products": {
+          "single": "mtvplay_android_single",
+          "monthly": "mtvplay_android_monthly",
+          "yearly": "mtvplay_android_yearly"
+        }
+      },
+      "ios": {
+        "products": {
+          "single": "mtv_play_single_episode_purchase",
+          "monthly": "mtv_play_subscription_monthly",
+          "yearly": "mtv_play_subscription_yearly"
+        }
+      },
+      "amazon": {
+        "products": {
+          "single": "com.mtvplay.web.episode",
+          "monthly": "com.mtvplay.web.monthly",
+          "yearly": "com.mtvplay.web.yearly"
+        },
+        "src": "https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API.min.js"
+      },
+      "mockStore": {
+        "products": {
+          "single": "single_mock",
+          "monthly": "monthly_mock",
+          "yearly": "yearly_mock"
+        }
+      }
+    },
     "native": {
       "platforms": {
         "android": {
@@ -55,5 +52,18 @@
         }
       }
     }
+  },
+  "standard": {
+    "globals": [
+      "before",
+      "describe",
+      "it",
+      "beforeEach",
+      "sinon",
+      "expect",
+      "xit",
+      "chai",
+      "amzn_wa"
+    ]
   }
 }

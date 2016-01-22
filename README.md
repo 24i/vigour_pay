@@ -92,7 +92,7 @@ button.onClick(() => {
       }
     } else {
       // everything worked, but the user cancelled the purchase at some point
-      console.log('dude why dont u buy? (gif monne)')
+      // console.log('dude why dont u buy? (gif monne)')
     }
   })
 })

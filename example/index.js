@@ -4,132 +4,87 @@
 
 require('./style.less')
 var Element = require('vigour-element')
-Element.prototype.inject(
-  require('vigour-element/lib/property/text'),
-  require('vigour-element/lib/property/transform'),
-  require('vigour-element/lib/property/css'),
-  require('vigour-element/lib/property/attributes'),
-  require('vigour-element/lib/events/render')
-)
 
-// require facebook
-var Pay = require('../lib/')
+var app = require('vigour-element/lib/app')
+
+// console.log('------------------ require pay')
+var pay = require('../lib/')
+// console.log('------------------ required pay')
 
 var plain = require('vigour-js/lib/methods/plain')
 var Observable = require('vigour-js/lib/base')
 Observable.prototype.inject(plain)
 
-var pay = new Pay()
+if (navigator && /amazon-fireos|AmazonWebAppPlatform|; AFT/.test(navigator.userAgent)) {
+  // testing sdk not necessary for production
+  var script_testing = document.createElement('script')
+  const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'
+  document.getElementsByTagName('head')[0].appendChild(script_testing)
+  script_testing.src = AMAZON_WEB_API_TESTING
+  script_testing.id = 'amazon-script-testing'
 
-window.p = pay
-
-function payString (pay) {
-  return JSON.stringify(pay.plain(void 0, true), false, 2)
+  script_testing.onload = () => {
+    amzn_wa.enableApiTester(amzn_wa_tester)
+  }
 }
 
-console.log('???????????', pay.plain(void 0, true))
+window.pay = pay
 
-// console.log('?????????????', payString(pay))
-
-var Product = new Element({
-  label: {
-    helper: {
-      node: 'span',
-      text: 'product (app) label:'
-    },
-    value:  {
-      node: 'span',
-      text: '...'
-    }
-  },
-  id: {
-    node: 'span',
-    text: 'product label'
-  }
+var Monthly = new Element({
+  node: 'button',
+  text: pay.products.monthly.val
 }).Constructor
 
-var app = new Element({
+var Yearly = new Element({
+  node: 'button',
+  text: pay.products.yearly.val
+}).Constructor
+
+var Single = new Element({
+  node: 'button',
+  text: pay.products.single.val
+}).Constructor
+
+var Clearproducts = new Element({
+  node: 'button',
+  text: 'Clear your purchases'
+}).Constructor
+
+app.set({
   node: document.body,
-  topbar: {
-    header: {
-      text: 'Pay example app lala'
-    }
-  },
-  state: {
-    text: payString(pay)
-  },
-  // pay stuff
-  products: {
-
-  },
-  buying: {
-
-    helper: {
-      text: 'buy:',
-      node: 'span'
-    },
-    label: {
-      node: 'input',
-      text: "monthly"
-    },
-    button: {
-      node: 'button',
-      text: 'buy dat',
-      on: {
-        click () {
-          var productLabel = app.buying.label.node.value
-          pay.buy(productLabel, (err, response) => {
-            console.log('---> BUY CALLBACK!', err, response)
-          })
-        }
-      }
-    },
-     button2: {
-      node: 'button',
-      text: 'check what I can buy',
-      on: {
-        click () {
-          pay.verifyProducts()
-
-
-          // (productLabel, (err, response) => {
-          //   debugger
-          //   console.log('---> BUY CALLBACK!', err, response)
-          // })
-        }
-      }
-    }
-  },
-  log: {
-    text: 'messages will appear here...'
+  holder: {
+    month: new Monthly(),
+    year: new Yearly(),
+    single: new Single(),
+    clearproducts: new Clearproducts()
   }
 })
 
-if(pay.val) {
-  pay.on('error', function (err) {
-    console.error(err)
-  })
+pay.on('bought', function (receipt) {
+  // console.log('----bougth receipt confirmation ---', receipt)
+})
+pay.on('error', function (error) {
+  // console.error('error when buying item ------   ', error.key)
+})
 
-  pay.ready.on(() => {
-    console.log('---- pay.ready!')
-    writeStatus()
-  })
+var month = document.getElementsByClassName('month')[0]
+var year = document.getElementsByClassName('year')[0]
+var single = document.getElementsByClassName('single')[0]
+var clearproducts = document.getElementsByClassName('clearproducts')[0]
 
-  pay.products.on(() => {
-    console.log('---- pay.products!')
-    writeStatus()
-  })
-
-  pay.products.each((val, key) => {
-    console.log('-- have product', key)
-    val.on(() => {
-      writeStatus()
-    })
-  })
-} else {
-  console.warn('hey this platform seems to be incompatible with pay :(')
+clearproducts.onclick = function () {
+  localStorage.clear()
+  // console.log('localstorage is empty now!----')
 }
 
-function writeStatus () {
-  app.state.text.val = payString(pay)
+month.onclick = function (argument) {
+  pay.products.monthly.owned.val = true
+}
+
+year.onclick = function (argument) {
+  pay.products.yearly.owned.val = true
+}
+
+single.onclick = function (argument) {
+  pay.products.single.owned.val = true
 }

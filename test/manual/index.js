@@ -5,7 +5,7 @@ var env = require('vigour-env')
 
 var inject
 if (!env.isNative.val) {
-  console.log('inject amazon platform!')
+  // console.log('inject amazon platform!')
   inject = require('../../lib/platform/amazon')
 }
 

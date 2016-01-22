@@ -1,0 +1,63 @@
+{
+   "com.mtvplay.web.episode":{
+      "price":1.06,
+      "title":"Episode Pass",
+      "itemType":"CONSUMABLE",
+      "description":"—",
+      "smallIconUrl":"http://",
+      "languageTitleMap":{
+         "US":"—"
+      },
+      "languageDescriptionMap":{
+         "US":"—"
+      },
+      "currencyPriceMap":{
+         "BR":3.95,
+         "DE":0.99,
+         "AU":1.48,
+         "IN":70.33,
+         "JP":131.0,
+         "CN":7.0,
+         "IT":0.99,
+         "GB":0.69,
+         "FR":0.99,
+         "CA":1.41,
+         "ES":0.99,
+         "US":1.06
+      }
+   },
+   "com.mtvplay.web.yearly":{
+      "price":32.19,
+      "subscriptionParent":"com.mtvplay.web.sub",
+      "title":"Premium Pass",
+      "itemType":"SUBSCRIPTION",
+      "description":"—",
+      "smallIconUrl":"http://",
+      "languageTitleMap":{
+         "US":"—"
+      },
+      "languageDescriptionMap":{
+         "US":"—"
+      },
+      "currencyPriceMap":{
+         "US":0.0
+      }
+   },
+   "com.mtvplay.web.monthly":{
+      "price":3.21,
+      "subscriptionParent":"com.mtvplay.web.sub",
+      "title":"Premium Pass",
+      "itemType":"SUBSCRIPTION",
+      "description":"—",
+      "smallIconUrl":"http://",
+      "languageTitleMap":{
+         "US":"—"
+      },
+      "languageDescriptionMap":{
+         "US":"—"
+      },
+      "currencyPriceMap":{
+         "US":0.0
+      }
+   }
+}
