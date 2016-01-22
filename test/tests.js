@@ -1,5 +1,5 @@
 'use strict'
-
+console.log('require gaston tester')
 require('gaston-tester')
 
 const AMAZON_WEB_API_TESTING = 'https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API-tester.min.js'

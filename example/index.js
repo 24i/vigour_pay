@@ -30,61 +30,68 @@ if (navigator && /amazon-fireos|AmazonWebAppPlatform|; AFT/.test(navigator.userA
 
 window.pay = pay
 
-var Monthly = new Element({
-  node: 'button',
-  text: pay.products.monthly.val
-}).Constructor
+pay.ready.on('data', function () {
 
-var Yearly = new Element({
-  node: 'button',
-  text: pay.products.yearly.val
-}).Constructor
+  var ready = this.val
+  if (ready) {
+    console.log('yeas pay ready')
+    var Monthly = new Element({
+      node: 'button',
+      text: pay.products.monthly.val
+    }).Constructor
 
-var Single = new Element({
-  node: 'button',
-  text: pay.products.single.val
-}).Constructor
+    var Yearly = new Element({
+      node: 'button',
+      text: pay.products.yearly.val
+    }).Constructor
 
-var Clearproducts = new Element({
-  node: 'button',
-  text: 'Clear your purchases'
-}).Constructor
+    var Single = new Element({
+      node: 'button',
+      text: pay.products.single.val
+    }).Constructor
 
-app.set({
-  node: document.body,
-  holder: {
-    month: new Monthly(),
-    year: new Yearly(),
-    single: new Single(),
-    clearproducts: new Clearproducts()
+    var Clearproducts = new Element({
+      node: 'button',
+      text: 'Clear your purchases'
+    }).Constructor
+
+    app.set({
+      node: document.body,
+      holder: {
+        month: new Monthly(),
+        year: new Yearly(),
+        single: new Single(),
+        clearproducts: new Clearproducts()
+      }
+    })
+
+    pay.on('bought', function (receipt) {
+      // console.log('----bougth receipt confirmation ---', receipt)
+    })
+    pay.on('error', function (error) {
+      // console.error('error when buying item ------   ', error.key)
+    })
+
+    var month = document.getElementsByClassName('month')[0]
+    var year = document.getElementsByClassName('year')[0]
+    var single = document.getElementsByClassName('single')[0]
+    var clearproducts = document.getElementsByClassName('clearproducts')[0]
+
+    clearproducts.onclick = function () {
+      localStorage.clear()
+      // console.log('localstorage is empty now!----')
+    }
+
+    month.onclick = function (argument) {
+      pay.products.monthly.owned.val = true
+    }
+
+    year.onclick = function (argument) {
+      pay.products.yearly.owned.val = true
+    }
+
+    single.onclick = function (argument) {
+      pay.products.single.owned.val = true
+    }    
   }
 })
-
-pay.on('bought', function (receipt) {
-  // console.log('----bougth receipt confirmation ---', receipt)
-})
-pay.on('error', function (error) {
-  // console.error('error when buying item ------   ', error.key)
-})
-
-var month = document.getElementsByClassName('month')[0]
-var year = document.getElementsByClassName('year')[0]
-var single = document.getElementsByClassName('single')[0]
-var clearproducts = document.getElementsByClassName('clearproducts')[0]
-
-clearproducts.onclick = function () {
-  localStorage.clear()
-  // console.log('localstorage is empty now!----')
-}
-
-month.onclick = function (argument) {
-  pay.products.monthly.owned.val = true
-}
-
-year.onclick = function (argument) {
-  pay.products.yearly.owned.val = true
-}
-
-single.onclick = function (argument) {
-  pay.products.single.owned.val = true
-}
