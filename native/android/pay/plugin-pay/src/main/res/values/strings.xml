@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PAY</string>
+    <string name="billingKey">dummy</string>
+</resources>

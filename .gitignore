@@ -6,3 +6,8 @@ mocha.css
 mocha.js
 test-runner.html
 bundles
+!test/node_modules
+*/build/*
+*/build.*
+*.iml
+native/android/pay/.idea/

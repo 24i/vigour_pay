@@ -1,11 +1,17 @@
 {
   "name": "vigour-pay",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Native store purchasing and web payment",
   "main": "lib/index.js",
   "scripts": {
-    "start": "./node_modules/.bin/gaston",
-    "test": "./node_modules/.bin/gaston test browser"
+    "test": "gaston test -r browser -s test/browser/index.js",
+    "ios-test": "cd test && gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms ios",
+    "ios": "npm run build && wrapper build --native.selectedPlatforms ios",
+    "android-test": "cd test && gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms android",
+    "android": "npm run build && wrapper build --native.selectedPlatforms android",
+    "all": "npm run build && wrapper build",
+    "prepush": "./node_modules/.bin/standard lib/**/*.js",
+    "postinstall": "./makelinks.sh vigour-pay"
   },
   "repository": {
     "type": "git",
@@ -34,33 +40,33 @@
     "node": ">=0.12"
   },
   "dependencies": {
+    "vigour-config": "~0.0.6",
+    "vigour-env": "^1.0.12",
+    "vigour-js": "~0.3.0",
     "vigour-ua": "*",
-    "vigour-wrapper": "*"
+    "vigour-wrapper": "~2.2.0"
   },
   "devDependencies": {
     "vigour-element": "*",
-    "lodash": "3.10.x"
+    "gaston": "~0.29.5"
   },
   "vigour": {
+    "pay": {
+      "amazon": {
+        "src": "https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API.min.js"
+      }
+    },
     "plugin": {
       "android": {
-        "skipInstall": true,
-        "className": "io.vigour.pay",
-        "instantiation": "new Pay(this, webview)"
+        "className": "io.vigour.plugin.pay.PayPlugin",
+        "instantiation": "new PayPlugin(this)"
       }
     }
   },
   "standard": {
     "globals": [
-      "describe",
-      "it",
-      "expect",
-      "before",
-      "after",
-      "beforeEach",
-      "afterEach",
-      "sinon",
-      "alert"
+      "alert",
+      "amzn_wa"
     ]
   }
 }

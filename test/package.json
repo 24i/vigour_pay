@@ -1,0 +1,95 @@
+{
+  "name": "pay-tests",
+  "dependencies": {
+    "vigour-pay": "../"
+  },
+  "gaston": {
+    "package": true
+  },
+  "vigour": {
+    "pay": {
+      "android": {
+        "products": {
+          "single": "mtvplay_android_single",
+          "monthly": "mtvplay_android_monthly",
+          "yearly": "mtvplay_android_yearly"
+        }
+      },
+      "ios": {
+        "products": {
+          "single": "mtv_play_single_episode_purchase",
+          "monthly": "mtv_play_subscription_monthly",
+          "yearly": "mtv_play_subscription_yearly"
+        }
+      },
+      "amazon": {
+        "products": {
+          "single": "amazon_single_id",
+          "monthly": "amazon_monthly_id",
+          "yearly": "amazon_yearly_id"
+        },
+        "src": "https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API.min.js"
+      },
+      "testStore": {
+        "products": {
+          "single": "{region}_single_test",
+          "monthly": "{region}_monthly_test",
+          "yearly": "{region}_yearly_test"
+        }
+      }
+    },
+    "native": {
+      "debug": true,
+      "platforms": {
+        "ios": {
+          "productName": "Pay Tests",
+          "organizationName": "Vigour",
+          "organizationIdentifier": "io.vigour.test",
+          "buildNumber": "1",
+          "appIndexPath": "build.html",
+          "NSAllowsArbitraryLoads": true,
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true,
+            "mocha.js": true,
+            "mocha.css": true
+          }
+        },
+        "android": {
+          "debug": true,
+          "run": true,
+          "productName": "Pay Tests",
+          "applicationId": "io.vigour.paytest",
+          "appIndexPath": "build.html",
+          "splashDuration": "0",
+          "strings": {
+            "billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsVJDJDc37L5uM0Aj7B0mMfYloeEVhLmIRFc1OBW4mThWirXFkySrrUIpWpRwFZ+MOHVw2+1gp7gbNE8BCxQgNHfQsp2uXazUszXFufy+/0wvzD/3XwtxlIjv/3EdFMsXP0a3uckH4QLSRGKA1TNFAX3WpS7p+RoQSMnoz7VByC4uBgSydOShCMHy5YZ7TBbwk451RkuU/qxA4USRdUXT2EUcFLgO7UpLtNAt1BJY0X1/x0vaLAfrIK3On3Pl26qYJTdl8HOEP9msouSE6jGQZbN0dUDPwlyQIZmcejbGxrVJpqTuXmEm0q2p1YU2Kz0j9yiyUtqexjmgCTceE7tW8wIDAQAB"
+          },
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true,
+            "mocha.js": true,
+            "mocha.css": true
+          }
+        }
+      }
+    }
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "expect",
+      "before",
+      "after",
+      "beforeEach",
+      "afterEach",
+      "sinon",
+      "alert",
+      "amzn_wa",
+      "amzn_wa_tester"
+    ]
+  }
+}

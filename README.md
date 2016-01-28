@@ -2,8 +2,7 @@
 Native store purchasing and web payment
 
 ## Install
-Add `"pay": "git+ssh://git@github.com:vigour-io/pay.git#master"` to the dependencies in your app's pakage.json, then run `npm update pay`
-Coming soon: `npm i vigour-pay`
+`npm install vigour-pay`
 
 ## Updates via upstream remote
 
@@ -20,7 +19,7 @@ See [wrapper](http://github.com/vigour-io/vigour-native)
 
 ## Config
 
-configuration for `pay` should go in `package.json`
+configuration for `pay` should go in the app's `package.json`
 
 ```json
 {
@@ -62,7 +61,7 @@ configuration for `pay` should go in `package.json`
 }
 ```
 
-## Use of the Module 
+## Use of the Module
 
 ### new Pay(settings)
 ```javascript
@@ -93,7 +92,7 @@ button.onClick(() => {
       }
     } else {
       // everything worked, but the user cancelled the purchase at some point
-      console.log('dude why dont u buy? (gif monne)')
+      // console.log('dude why dont u buy? (gif monne)')
     }
   })
 })

@@ -1,0 +1,69 @@
+{
+  "name": "pay example app",
+  "gaston": {
+    "package": true
+  },
+  "vigour": {
+    "pay":  {
+      "android": {
+        "products": {
+          "single": "mtvplay_android_single",
+          "monthly": "mtvplay_android_monthly",
+          "yearly": "mtvplay_android_yearly"
+        }
+      },
+      "ios": {
+        "products": {
+          "single": "mtv_play_single_episode_purchase",
+          "monthly": "mtv_play_subscription_monthly",
+          "yearly": "mtv_play_subscription_yearly"
+        }
+      },
+      "amazon": {
+        "products": {
+          "single": "com.mtvplay.web.episode",
+          "monthly": "com.mtvplay.web.monthly",
+          "yearly": "com.mtvplay.web.yearly"
+        },
+        "src": "https://resources.amazonwebapps.com/v1/latest/Amazon-Web-App-API.min.js"
+      },
+      "mockStore": {
+        "products": {
+          "single": "single_mock",
+          "monthly": "monthly_mock",
+          "yearly": "yearly_mock"
+        }
+      }
+    },
+    "native": {
+      "platforms": {
+        "android": {
+          "productName": "Pay Example",
+          "applicationId": "io.vigour.pay-test",
+          "appIndexPath": "build.html",
+          "keystoreFile": "example.keystore",
+          "keystorePassword": "shmexample",
+          "keystoreAlias": "blabla",
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true
+          }
+        }
+      }
+    }
+  },
+  "standard": {
+    "globals": [
+      "before",
+      "describe",
+      "it",
+      "beforeEach",
+      "sinon",
+      "expect",
+      "xit",
+      "chai",
+      "amzn_wa"
+    ]
+  }
+}
