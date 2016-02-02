@@ -65,8 +65,7 @@
   },
   "standard": {
     "globals": [
-      "alert",
-      "amzn_wa"
+      "alert"
     ]
   }
 }
