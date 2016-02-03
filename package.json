@@ -1,6 +1,6 @@
 {
   "name": "vigour-pay",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Native store purchasing and web payment",
   "main": "lib/index.js",
   "scripts": {
