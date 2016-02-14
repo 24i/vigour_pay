@@ -1,6 +1,6 @@
 {
   "name": "vigour-pay",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Native store purchasing and web payment",
   "main": "lib/index.js",
   "scripts": {
@@ -40,11 +40,11 @@
     "node": ">=0.12"
   },
   "dependencies": {
-    "vigour-config": "~0.0.6",
-    "vigour-env": "^1.0.12",
-    "vigour-js": "~0.3.0",
+    "vigour-config": "^0.0.9",
+    "vigour-env": "^1.0.19",
+    "vigour-js": "^0.4.4",
     "vigour-ua": "*",
-    "vigour-wrapper": "~2.2.0"
+    "vigour-wrapper": "^2.2.13"
   },
   "devDependencies": {
     "vigour-element": "*",
