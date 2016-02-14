@@ -59,7 +59,10 @@
     "plugin": {
       "android": {
         "className": "io.vigour.plugin.pay.PayPlugin",
-        "instantiation": "new PayPlugin(this)"
+        "instantiation": "new PayPlugin(this)",
+        "permissions": [
+          "com.android.vending.BILLING"
+        ]
       }
     }
   },
