@@ -1,6 +1,6 @@
 {
   "name": "vigour-pay",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "Native store purchasing and web payment",
   "main": "lib/index.js",
   "scripts": {
@@ -40,9 +40,9 @@
     "node": ">=0.12"
   },
   "dependencies": {
-    "vigour-config": "~0.0.6",
-    "vigour-env": "^1.0.12",
-    "vigour-js": "~0.3.0",
+    "vigour-config": "^0.0.9",
+    "vigour-env": "^1.0.19",
+    "vigour-js": "^0.4.4",
     "vigour-ua": "*",
     "vigour-wrapper-bridge": "^1.0.10"
   },
@@ -60,14 +60,16 @@
     "plugin": {
       "android": {
         "className": "io.vigour.plugin.pay.PayPlugin",
-        "instantiation": "new PayPlugin(this)"
+        "instantiation": "new PayPlugin(this)",
+        "permissions": [
+          "com.android.vending.BILLING"
+        ]
       }
     }
   },
   "standard": {
     "globals": [
-      "alert",
-      "amzn_wa"
+      "alert"
     ]
   }
 }

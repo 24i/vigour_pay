@@ -3,6 +3,7 @@ package io.vigour.plugin.example;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -63,6 +64,7 @@ public class MainActivity extends Activity {
         textView.setText("buying...");
         plugin.buy(map).subscribe(new Action1<String>() {
                                       @Override public void call(String s) {
+                                          Log.i("receipt", s);
                                           textView.setText(s);
                                       }
                                   },
