@@ -44,11 +44,12 @@
     "vigour-env": "^1.0.12",
     "vigour-js": "~0.3.0",
     "vigour-ua": "*",
-    "vigour-wrapper": "~2.2.0"
+    "vigour-wrapper-bridge": "^1.0.10"
   },
   "devDependencies": {
     "vigour-element": "*",
-    "gaston": "~0.29.5"
+    "gaston": "~0.29.5",
+    "vigour-wrapper": "^4.0.0"
   },
   "vigour": {
     "pay": {
